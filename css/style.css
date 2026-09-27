@@ -176,3 +176,50 @@ body {
   cursor: grabbing;
 }
 
+/* ==========================================================================
+   ANIMAÇÕES DE ROLAGEM (REVEAL ON SCROLL VIA INTERSECTION OBSERVER)
+   ========================================================================== */
+.reveal-on-scroll {
+  opacity: 0;
+  transform: translateY(35px);
+  transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1), transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.reveal-on-scroll.is-revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.delay-100 { transition-delay: 100ms; }
+.delay-150 { transition-delay: 150ms; }
+.delay-200 { transition-delay: 200ms; }
+.delay-300 { transition-delay: 300ms; }
+.delay-400 { transition-delay: 400ms; }
+
+/* Efeito de Card de Projeto com Hover Fluido */
+.project-card-asymmetric {
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  transition: border-color 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.project-card-asymmetric:hover {
+  border-color: rgba(16, 185, 129, 0.45);
+  box-shadow: 0 20px 45px -10px rgba(16, 185, 129, 0.15), 0 0 20px rgba(16, 185, 129, 0.08);
+  transform: translateY(-4px);
+}
+
+/* Aparição suave de tags no hover */
+.tech-tag-badge {
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.project-card-asymmetric:hover .tech-tag-badge {
+  border-color: rgba(16, 185, 129, 0.4);
+  background-color: rgba(16, 185, 129, 0.12);
+  color: #34d399;
+  transform: translateY(-2px);
+}
+
