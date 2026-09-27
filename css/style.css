@@ -223,3 +223,14 @@ body {
   transform: translateY(-2px);
 }
 
+/* Animação de onda de áudio para o card do projeto Texto para Áudio */
+@keyframes wave {
+  0%, 100% {
+    transform: scaleY(0.5);
+    opacity: 0.6;
+  }
+  50% {
+    transform: scaleY(1);
+    opacity: 1;
+  }
+}

@@ -285,41 +285,63 @@
         <!-- Grade Assimétrica Moderna de Projetos (12 Colunas) -->
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
           
-          <!-- Card 1: Destaque Amplo (8 Colunas) -->
+          <!-- Card 1: Destaque Amplo (8 Colunas) - Projeto Real: Texto para Áudio -->
           <article class="lg:col-span-8 group project-card-asymmetric rounded-3xl overflow-hidden bg-[#111111]/90 backdrop-blur-xl p-6 sm:p-8 flex flex-col justify-between reveal-on-scroll">
             <div>
               <!-- Mockup / Preview Visual com Zoom Suave no Hover -->
               <div class="overflow-hidden rounded-2xl bg-[#080808] border border-white/5 relative mb-6">
-                <!-- Barra de Navegador Fictícia -->
+                <!-- Barra de Terminal Fictícia -->
                 <div class="flex items-center justify-between px-4 py-3 border-b border-white/5 bg-white/[0.02]">
                   <div class="flex items-center gap-1.5">
-                    <span class="w-2.5 h-2.5 rounded-full bg-white/20"></span>
-                    <span class="w-2.5 h-2.5 rounded-full bg-white/20"></span>
-                    <span class="w-2.5 h-2.5 rounded-full bg-white/20"></span>
+                    <span class="w-2.5 h-2.5 rounded-full bg-red-500/50"></span>
+                    <span class="w-2.5 h-2.5 rounded-full bg-yellow-500/50"></span>
+                    <span class="w-2.5 h-2.5 rounded-full bg-emerald-500/80"></span>
                   </div>
-                  <span class="font-mono text-[11px] text-neutral-500">wandry.dev/projetos/atlas-3d</span>
+                  <span class="font-mono text-[11px] text-neutral-500">github.com/Wandry03/Texto-para-audio</span>
                   <div class="w-8"></div>
                 </div>
 
-                <!-- Canvas de Ilustração Técnica 3D -->
-                <div class="h-60 sm:h-72 p-6 flex items-center justify-center relative overflow-hidden group-hover:scale-[1.03] transition-transform duration-700 ease-out">
-                  <div class="absolute inset-0 bg-radial-gradient from-emerald-500/10 via-transparent to-transparent opacity-50"></div>
-                  <!-- Malha Isométrica Vetorial -->
-                  <div class="w-full h-full flex flex-col items-center justify-center text-center space-y-3 z-10">
-                    <div class="relative flex items-center justify-center">
-                      <div class="w-24 h-24 rounded-full border border-emerald-500/30 animate-ping absolute opacity-20"></div>
-                      <div class="w-28 h-28 rounded-full border border-dashed border-emerald-400/40 flex items-center justify-center">
-                        <div class="w-16 h-16 rounded-full bg-emerald-500/15 border border-emerald-400/50 flex items-center justify-center backdrop-blur-md">
-                          <span class="font-serif text-2xl text-emerald-300 font-bold">3D</span>
-                        </div>
+                <!-- Preview Visual: Interface Terminal do Conversor TTS -->
+                <div class="h-60 sm:h-72 p-6 flex items-center justify-center relative overflow-hidden group-hover:scale-[1.03] transition-transform duration-700 ease-out bg-gradient-to-br from-[#0a0f0c] to-[#090909]">
+                  <div class="absolute inset-0 bg-gradient-to-t from-emerald-900/10 via-transparent to-transparent pointer-events-none"></div>
+
+                  <!-- Layout tipo terminal com ondas de áudio -->
+                  <div class="w-full max-w-sm space-y-3 z-10">
+                    <!-- Linha de input -->
+                    <div class="flex items-center gap-3 px-4 py-3 rounded-xl bg-[#111]/80 border border-white/8">
+                      <svg class="w-4 h-4 text-emerald-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                      </svg>
+                      <span class="font-mono text-xs text-neutral-300 truncate">"Olá, este é um exemplo de texto para áudio..."</span>
+                    </div>
+
+                    <!-- Onda de áudio animada -->
+                    <div class="flex items-center justify-center gap-1 py-4">
+                      <div class="w-1 bg-emerald-500 rounded-full animate-[wave_1.2s_ease-in-out_infinite]" style="height:8px;animation-delay:0s"></div>
+                      <div class="w-1 bg-emerald-400 rounded-full animate-[wave_1.2s_ease-in-out_infinite]" style="height:20px;animation-delay:0.1s"></div>
+                      <div class="w-1 bg-emerald-500 rounded-full animate-[wave_1.2s_ease-in-out_infinite]" style="height:32px;animation-delay:0.2s"></div>
+                      <div class="w-1 bg-emerald-400 rounded-full animate-[wave_1.2s_ease-in-out_infinite]" style="height:18px;animation-delay:0.3s"></div>
+                      <div class="w-1 bg-emerald-500 rounded-full animate-[wave_1.2s_ease-in-out_infinite]" style="height:28px;animation-delay:0.4s"></div>
+                      <div class="w-1 bg-teal-400 rounded-full animate-[wave_1.2s_ease-in-out_infinite]" style="height:40px;animation-delay:0.5s"></div>
+                      <div class="w-1 bg-emerald-500 rounded-full animate-[wave_1.2s_ease-in-out_infinite]" style="height:22px;animation-delay:0.6s"></div>
+                      <div class="w-1 bg-emerald-400 rounded-full animate-[wave_1.2s_ease-in-out_infinite]" style="height:36px;animation-delay:0.7s"></div>
+                      <div class="w-1 bg-emerald-500 rounded-full animate-[wave_1.2s_ease-in-out_infinite]" style="height:14px;animation-delay:0.8s"></div>
+                      <div class="w-1 bg-teal-400 rounded-full animate-[wave_1.2s_ease-in-out_infinite]" style="height:30px;animation-delay:0.9s"></div>
+                      <div class="w-1 bg-emerald-500 rounded-full animate-[wave_1.2s_ease-in-out_infinite]" style="height:44px;animation-delay:1.0s"></div>
+                      <div class="w-1 bg-emerald-400 rounded-full animate-[wave_1.2s_ease-in-out_infinite]" style="height:26px;animation-delay:1.1s"></div>
+                      <div class="w-1 bg-emerald-500 rounded-full animate-[wave_1.2s_ease-in-out_infinite]" style="height:16px;animation-delay:0.9s"></div>
+                      <div class="w-1 bg-teal-400 rounded-full animate-[wave_1.2s_ease-in-out_infinite]" style="height:34px;animation-delay:0.7s"></div>
+                      <div class="w-1 bg-emerald-500 rounded-full animate-[wave_1.2s_ease-in-out_infinite]" style="height:20px;animation-delay:0.5s"></div>
+                    </div>
+
+                    <!-- Status bar -->
+                    <div class="flex items-center justify-between px-3 py-2 rounded-lg bg-emerald-500/10 border border-emerald-500/20">
+                      <div class="flex items-center gap-2">
+                        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                        <span class="font-mono text-[11px] text-emerald-300">Convertendo para .mp3</span>
                       </div>
+                      <span class="font-mono text-[11px] text-neutral-400">gTTS / Python</span>
                     </div>
-                    <div class="font-mono text-xs text-neutral-300 tracking-wider">
-                      [ WEBGL CARTOGRAPHY • 60 FPS • INTERACTIVE ]
-                    </div>
-                    <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-[10px] font-mono text-emerald-400">
-                      Coordenadas: 18°14'S, 43°36'W (Diamantina)
-                    </span>
                   </div>
                 </div>
               </div>
@@ -327,14 +349,14 @@
               <!-- Informações do Projeto -->
               <div class="space-y-3">
                 <div class="flex items-center justify-between text-xs font-mono text-neutral-400">
-                  <span class="text-emerald-400 font-semibold tracking-wider">01 / CREATIVE 3D WEB</span>
-                  <span>2026</span>
+                  <span class="text-emerald-400 font-semibold tracking-wider">01 / PYTHON &amp; AUTOMAÇÃO</span>
+                  <span>2025</span>
                 </div>
                 <h3 class="font-serif text-2xl sm:text-3xl text-white group-hover:text-emerald-400 transition-colors">
-                  Atlas • Visualização Cartográfica 3D & WebGL
+                  Texto para Áudio • Conversor TTS em Python
                 </h3>
                 <p class="text-neutral-400 text-sm sm:text-base font-light leading-relaxed">
-                  Experiência web imersiva construída com Three.js e shaders WebGL. Mapeamento geográfico com matriz de pontos, rotação controlada no eixo Y, arcos orbitais e física inercial de toque em tempo real.
+                  Programa em Python que converte qualquer texto em áudio de forma simples e eficiente. Utiliza a biblioteca gTTS (Google Text-to-Speech) para gerar arquivos de áudio .mp3 a partir de strings de texto, com suporte a múltiplos idiomas.
                 </p>
               </div>
             </div>
@@ -342,16 +364,16 @@
             <!-- Tags de Tecnologias (Aparição e Realce Suave) -->
             <div class="pt-6 mt-6 border-t border-white/5 flex flex-wrap items-center justify-between gap-4">
               <div class="flex flex-wrap items-center gap-2">
-                <span class="tech-tag-badge px-3 py-1 rounded-full text-xs font-mono bg-white/5 border border-white/10 text-neutral-300">Three.js</span>
-                <span class="tech-tag-badge px-3 py-1 rounded-full text-xs font-mono bg-white/5 border border-white/10 text-neutral-300">WebGL</span>
-                <span class="tech-tag-badge px-3 py-1 rounded-full text-xs font-mono bg-white/5 border border-white/10 text-neutral-300">JavaScript (ES6+)</span>
-                <span class="tech-tag-badge px-3 py-1 rounded-full text-xs font-mono bg-white/5 border border-white/10 text-neutral-300">Tailwind</span>
-                <span class="tech-tag-badge px-3 py-1 rounded-full text-xs font-mono bg-white/5 border border-white/10 text-neutral-300">Canvas</span>
+                <span class="tech-tag-badge px-3 py-1 rounded-full text-xs font-mono bg-white/5 border border-white/10 text-neutral-300">Python</span>
+                <span class="tech-tag-badge px-3 py-1 rounded-full text-xs font-mono bg-white/5 border border-white/10 text-neutral-300">gTTS</span>
+                <span class="tech-tag-badge px-3 py-1 rounded-full text-xs font-mono bg-white/5 border border-white/10 text-neutral-300">Text-to-Speech</span>
+                <span class="tech-tag-badge px-3 py-1 rounded-full text-xs font-mono bg-white/5 border border-white/10 text-neutral-300">Automação</span>
+                <span class="tech-tag-badge px-3 py-1 rounded-full text-xs font-mono bg-white/5 border border-white/10 text-neutral-300">CLI</span>
               </div>
-              <span class="inline-flex items-center gap-1.5 font-mono text-xs text-emerald-400 group-hover:translate-x-1 transition-transform">
-                <span>Ver Projeto</span>
+              <a href="https://github.com/Wandry03/Texto-para-audio" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 font-mono text-xs text-emerald-400 group-hover:translate-x-1 transition-transform">
+                <span>Ver no GitHub</span>
                 <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
-              </span>
+              </a>
             </div>
           </article>
 
@@ -660,7 +682,7 @@
           </h2>
 
           <p class="font-sans text-neutral-300 text-base sm:text-lg font-light leading-relaxed max-w-2xl mx-auto">
-            Disponível para novos projetos freelance, oportunidades no desenvolvimento web ou para trocar ideias técnicas. Escolha o seu canal de preferência:
+            Disponível para novos projetos freelance, estágios e oportunidades no mercado de trabalho. Escolha o seu canal de preferência:
           </p>
         </div>
 
@@ -769,7 +791,7 @@
               </svg>
             </div>
             <div>
-              <span class="font-mono text-xs uppercase tracking-wider text-neutral-400 block">Prefere mensagem por correio eletrônico?</span>
+              <span class="font-mono text-xs uppercase tracking-wider text-neutral-400 block">Prefere mensagem por Email?</span>
               <a href="mailto:nuneswandry061@gmail.com" class="font-sans text-lg text-white font-medium hover:text-emerald-400 transition-colors">
                 nuneswandry061@gmail.com
               </a>
