@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wandry — Desenvolvedor WEB | Editorial Minimalista</title>
+  <meta name="description" content="Portfólio de Wandry, Desenvolvedor Web focado em interfaces minimalistas, elegantes e de alta performance.">
+  
+  <!-- Fontes Google: Playfair Display (Serif Editorial), Cormorant Garamond, Plus Jakarta Sans, JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=JetBrains+Mono:wght@300;400;500&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              black: '#0a0a0a',
+              card: '#111111',
+              border: '#1f1f1f',
+              muted: '#737373',
+            },
+            emerald: {
+              DEFAULT: '#10b981',
+              light: '#34d399',
+              dark: '#059669',
+              glow: 'rgba(16, 185, 129, 0.15)',
+            }
+          },
+          fontFamily: {
+            serif: ['"Playfair Display"', 'Georgia', 'serif'],
+            cormorant: ['"Cormorant Garamond"', 'Georgia', 'serif'],
+            sans: ['"Plus Jakarta Sans"', 'Inter', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- CSS Customizado -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body class="bg-[#0a0a0a] text-neutral-200 antialiased selection:bg-emerald-500 selection:text-black relative editorial-grid-bg min-h-screen flex flex-col justify-between">
+
+  <!-- Luzes de Ambiente com Gradiente Esmeralda (Background Glows) -->
+  <div class="ambient-glow top-0 left-1/4 -translate-x-1/2"></div>
+  <div class="ambient-glow top-1/3 right-0 opacity-10"></div>
+  <div class="ambient-glow bottom-10 left-10 opacity-10"></div>
+
+  <!-- =========================================================================
+       1. MENU DE NAVEGAÇÃO FIXO NO TOPO
+       ========================================================================= -->
+  <header id="main-navbar" class="fixed top-0 inset-x-0 z-50 py-6 transition-all duration-500 bg-[#0a0a0a]/70 backdrop-blur-md border-b border-white/5">
+    <div class="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 flex items-center justify-between">
+      
+      <!-- Logotipo Editorial -->
+      <a href="#hero" class="group flex items-baseline gap-1.5 focus:outline-none focus-visible:ring-1 focus-visible:ring-emerald-400" aria-label="Wandry - Página inicial">
+        <span class="font-serif text-2xl font-bold tracking-tight text-white group-hover:text-emerald-400 transition-colors duration-300">
+          Wandry
+        </span>
+        <span class="inline-block w-2 h-2 rounded-full bg-emerald-500 group-hover:scale-125 transition-transform duration-300"></span>
+        <span class="font-mono text-[10px] tracking-widest uppercase text-neutral-400 ml-1">/ dev</span>
+      </a>
+
+      <!-- Links de Navegação Desktop -->
+      <nav class="hidden md:flex items-center gap-8 font-sans text-sm tracking-wide">
+        <a href="#hero" class="nav-link text-white transition-colors duration-300 hover:text-emerald-400 py-1">Início</a>
+        <a href="#sobre" class="nav-link text-neutral-400 transition-colors duration-300 hover:text-emerald-400 py-1">Sobre</a>
+        <a href="#projetos" class="nav-link text-neutral-400 transition-colors duration-300 hover:text-emerald-400 py-1">Projetos</a>
+        <a href="#habilidades" class="nav-link text-neutral-400 transition-colors duration-300 hover:text-emerald-400 py-1">Habilidades</a>
+        <a href="#contato" class="nav-link text-neutral-400 transition-colors duration-300 hover:text-emerald-400 py-1">Contato</a>
+      </nav>
+
+      <!-- Botão de Ação CTA (Navbar) -->
+      <div class="hidden md:flex items-center">
+        <a href="#contato" class="group relative inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-emerald-500/30 bg-emerald-500/10 text-emerald-400 font-mono text-xs tracking-wider uppercase hover:bg-emerald-500 hover:text-black transition-all duration-300 shadow-[0_0_15px_rgba(16,185,129,0.1)] hover:shadow-[0_0_20px_rgba(16,185,129,0.4)]">
+          <span>Iniciar Conversa</span>
+          <svg class="w-3.5 h-3.5 transition-transform duration-300 group-hover:translate-x-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+          </svg>
+        </a>
+      </div>
+
+      <!-- Botão do Menu Mobile (Hambúrguer) -->
+      <button id="mobile-menu-toggle" type="button" class="md:hidden p-2 text-neutral-300 hover:text-white focus:outline-none focus-visible:ring-1 focus-visible:ring-emerald-400 rounded-lg" aria-label="Abrir menu de navegação" aria-expanded="false">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"/>
+        </svg>
+      </button>
+
+    </div>
+
+    <!-- Menu Dropdown Mobile -->
+    <div id="mobile-menu" class="md:hidden opacity-0 pointer-events-none -translate-y-4 transition-all duration-300 ease-out border-b border-white/10 bg-[#0a0a0a]/95 backdrop-blur-xl px-6 py-6 space-y-4">
+      <nav class="flex flex-col space-y-3 font-sans text-base">
+        <a href="#hero" class="text-white hover:text-emerald-400 py-2 border-b border-white/5">Início</a>
+        <a href="#sobre" class="text-neutral-300 hover:text-emerald-400 py-2 border-b border-white/5">Sobre</a>
+        <a href="#projetos" class="text-neutral-300 hover:text-emerald-400 py-2 border-b border-white/5">Projetos</a>
+        <a href="#habilidades" class="text-neutral-300 hover:text-emerald-400 py-2 border-b border-white/5">Habilidades</a>
+        <a href="#contato" class="text-neutral-300 hover:text-emerald-400 py-2">Contato</a>
+      </nav>
+      <div class="pt-4">
+        <a href="#contato" class="w-full inline-flex justify-center items-center px-5 py-3 rounded-full bg-emerald-500 text-black font-semibold text-sm">
+          Iniciar Conversa
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main class="flex-grow">
+    <!-- =========================================================================
+         2. SEÇÃO HERO (LAYOUT TIPOGRÁFICO EDITORIAL IMPACTANTE)
+         Importante: Sem imagem de rostos ou avatares!
+         ========================================================================= -->
+    <section id="hero" class="relative min-h-[92vh] pt-36 pb-20 md:pt-44 md:pb-28 flex items-center">
+      <div class="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 w-full">
+        
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+          
+          <!-- Coluna Principal: Tipografia & Ações -->
+          <div class="lg:col-span-8 space-y-8">
+            
+            <!-- Badge de Status Editorial -->
+            <div class="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full border border-emerald-500/25 bg-emerald-950/20 backdrop-blur-sm">
+              <span class="relative flex h-2 w-2">
+                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+              </span>
+              <span class="font-mono text-xs uppercase tracking-widest text-emerald-400 font-medium">
+                Disponível para novos projetos
+              </span>
+            </div>
+
+            <!-- Bloco de Títulos: "Oi! Eu sou o Wandry" e "Desenvolvedor WEB" -->
+            <div class="space-y-3">
+              <h1 class="font-serif text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-normal tracking-tight text-white leading-[1.08]">
+                Oi! Eu sou o <br class="hidden sm:inline">
+                <span class="italic font-light text-neutral-100 hover:text-emerald-400 transition-colors duration-300">Wandry</span>
+              </h1>
+
+              <div class="flex items-center gap-4 pt-1">
+                <div class="h-[1px] w-12 sm:w-20 bg-emerald-500/60 hidden sm:block"></div>
+                <h2 class="font-serif text-3xl sm:text-5xl md:text-6xl font-light tracking-wide text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 via-emerald-300 to-teal-200">
+                  Desenvolvedor WEB
+                </h2>
+              </div>
+            </div>
+
+            <!-- Subtítulo Editorial -->
+            <p class="font-sans text-neutral-300 text-lg sm:text-xl font-light max-w-2xl leading-relaxed">
+              Arquiteto de experiências digitais com foco em estética editorial, 
+              código limpo e alta performance. Transformando ideias complexas em interfaces 
+              elegantes, intuitivas e memoráveis.
+            </p>
+
+            <!-- Metadados Editoriais Rápidos -->
+            <div class="flex flex-wrap items-center gap-6 sm:gap-10 pt-2 font-mono text-xs text-neutral-400 border-t border-white/10 pt-6">
+              <div class="flex items-center gap-2">
+                <span class="text-emerald-400 font-bold">01.</span>
+                <span class="uppercase tracking-wider">Frontend Moderno</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <span class="text-emerald-400 font-bold">02.</span>
+                <span class="uppercase tracking-wider">Design Editorial</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <span class="text-emerald-400 font-bold">03.</span>
+                <span class="uppercase tracking-wider">Performance & Acessibilidade</span>
+              </div>
+            </div>
+
+            <!-- Botões de Ação Solicitados: "Ver Projetos" e "Contato" -->
+            <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 pt-4">
+              <a href="#projetos" class="btn-primary-green inline-flex items-center justify-center gap-3 px-8 py-4 rounded-full font-sans font-semibold text-sm tracking-wide group">
+                <span>Ver Projetos</span>
+                <svg class="w-4 h-4 transition-transform duration-300 group-hover:translate-y-0.5 group-hover:translate-x-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"/>
+                </svg>
+              </a>
+
+              <a href="#contato" class="btn-secondary-outline inline-flex items-center justify-center gap-3 px-8 py-4 rounded-full font-sans font-medium text-sm tracking-wide group">
+                <span>Contato</span>
+                <svg class="w-4 h-4 text-emerald-400 transition-transform duration-300 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+                </svg>
+              </a>
+            </div>
+
+          </div>
+
+          <!-- Coluna Visual Alternativa: Monograma & Composição Tipográfica Escultural -->
+          <!-- (Sem rostos humanos ou avatares - pura elegância arquitetônica e tipográfica) -->
+          <div class="lg:col-span-4 mt-8 lg:mt-0">
+            <div class="relative mx-auto max-w-sm lg:max-w-none">
+              
+              <!-- Card Estrutural de Destaque -->
+              <div class="border-gradient-subtle bg-[#111111]/80 backdrop-blur-xl rounded-2xl p-8 relative overflow-hidden group">
+                
+                <!-- Detalhe decorativo sutil no topo do card -->
+                <div class="flex items-center justify-between pb-6 border-b border-white/5">
+                  <div class="flex items-center gap-2">
+                    <span class="w-2.5 h-2.5 rounded-full bg-red-500/40"></span>
+                    <span class="w-2.5 h-2.5 rounded-full bg-yellow-500/40"></span>
+                    <span class="w-2.5 h-2.5 rounded-full bg-emerald-500/70"></span>
+                  </div>
+                  <span class="font-mono text-[11px] text-neutral-400 tracking-wider uppercase">PORTFOLIO.V1</span>
+                </div>
+
+                <!-- Monograma Escultural Editorial Central -->
+                <div class="py-10 text-center relative">
+                  <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+                    <div class="w-32 h-32 rounded-full bg-emerald-500/10 blur-2xl"></div>
+                  </div>
+                  <span class="font-serif text-8xl md:text-9xl font-bold tracking-tighter text-transparent bg-clip-text bg-gradient-to-b from-white via-neutral-200 to-neutral-700 select-none block">
+                    W<span class="text-emerald-400 text-6xl">.</span>
+                  </span>
+                  <p class="font-mono text-xs uppercase tracking-[0.25em] text-neutral-400 mt-2">
+                    CRAFTED WITH INTENT
+                  </p>
+                </div>
+
+                <!-- Indicadores de Princípios de Engenharia -->
+                <div class="space-y-3 pt-6 border-t border-white/5">
+                  <div class="flex items-center justify-between font-mono text-xs">
+                    <span class="text-neutral-400">ESTILO:</span>
+                    <span class="text-neutral-200 font-medium">Editorial Minimal</span>
+                  </div>
+                  <div class="flex items-center justify-between font-mono text-xs">
+                    <span class="text-neutral-400">FOCO:</span>
+                    <span class="text-emerald-400 font-medium">Frontend & UX</span>
+                  </div>
+                  <div class="flex items-center justify-between font-mono text-xs">
+                    <span class="text-neutral-400">BASE:</span>
+                    <span class="text-neutral-200 font-medium">HTML5 • Tailwind • JS</span>
+                  </div>
+                </div>
+
+                <!-- Gradiente sutil decorativo no canto inferior -->
+                <div class="absolute -bottom-8 -right-8 w-24 h-24 bg-emerald-500/10 rounded-full blur-xl pointer-events-none"></div>
+
+              </div>
+
+              <!-- Cartão de Destaque Flutuante com Métricas -->
+              <div class="absolute -bottom-6 -left-4 sm:-left-6 bg-[#161616]/90 border border-white/10 rounded-xl p-4 backdrop-blur-md shadow-2xl flex items-center gap-3">
+                <div class="p-2.5 rounded-lg bg-emerald-500/10 text-emerald-400">
+                  <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                  </svg>
+                </div>
+                <div>
+                  <div class="font-serif text-lg font-bold text-white leading-none">100%</div>
+                  <div class="font-sans text-[11px] text-neutral-400 mt-1">Design Responsivo & Fluido</div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         3. SEÇÃO SOBRE (MANIFESTO EDITORIAL)
+         ========================================================================= -->
+    <section id="sobre" class="py-24 border-t border-white/5 relative">
+      <div class="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+          
+          <div class="lg:col-span-4">
+            <span class="font-mono text-xs uppercase tracking-widest text-emerald-400 font-semibold block mb-2">
+              ( 01 ) Sobre
+            </span>
+            <h2 class="font-serif text-3xl sm:text-4xl text-white font-normal leading-tight">
+              Design limpo, tipografia expressiva e código meticuloso.
+            </h2>
+          </div>
+
+          <div class="lg:col-span-8 space-y-6 text-neutral-300 font-light text-base sm:text-lg leading-relaxed">
+            <p>
+              Acredito que interfaces digitais não precisam ser sobrecarregadas para serem impactantes. 
+              Meu trabalho combina a sutileza do design editorial clássico com as melhores práticas da web contemporânea.
+            </p>
+            <p>
+              Cada espaçamento, hierarquia tipográfica e transição são pensados intencionalmente para criar uma navegação fluida, acessível e prazerosa para o usuário final.
+            </p>
+            
+            <div class="grid grid-cols-2 sm:grid-cols-3 gap-6 pt-6 border-t border-white/10 font-mono text-xs">
+              <div>
+                <span class="text-neutral-400 block mb-1">LOCALIZAÇÃO</span>
+                <span class="text-white font-medium">Brasil (Remoto)</span>
+              </div>
+              <div>
+                <span class="text-neutral-400 block mb-1">STATUS</span>
+                <span class="text-emerald-400 font-medium">Disponível</span>
+              </div>
+              <div>
+                <span class="text-neutral-400 block mb-1">ESPECIALIDADE</span>
+                <span class="text-white font-medium">Frontend & UI/UX</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         4. SEÇÃO PROJETOS (PREVIEW MODERNO)
+         ========================================================================= -->
+    <section id="projetos" class="py-24 border-t border-white/5 bg-[#0d0d0d]/40 relative">
+      <div class="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
+        
+        <div class="flex flex-col sm:flex-row sm:items-end justify-between mb-16 gap-4">
+          <div>
+            <span class="font-mono text-xs uppercase tracking-widest text-emerald-400 font-semibold block mb-2">
+              ( 02 ) Projetos Selecionados
+            </span>
+            <h2 class="font-serif text-3xl sm:text-4xl text-white font-normal">
+              Trabalhos & Criações
+            </h2>
+          </div>
+          <p class="font-mono text-xs text-neutral-400">
+            [ CURADORIA DE EXPERIÊNCIAS WEB ]
+          </p>
+        </div>
+
+        <!-- Grade de Cards de Projetos (Sem fotos de pessoas) -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          
+          <!-- Projeto 1 -->
+          <article class="border-gradient-subtle bg-[#121212]/90 rounded-xl p-6 flex flex-col justify-between group">
+            <div class="space-y-4">
+              <div class="flex items-center justify-between text-xs font-mono text-neutral-400">
+                <span>01 / WEB APP</span>
+                <span class="text-emerald-400">2026</span>
+              </div>
+              <h3 class="font-serif text-2xl text-white group-hover:text-emerald-400 transition-colors">
+                Plataforma Editorial
+              </h3>
+              <p class="text-neutral-400 text-sm leading-relaxed">
+                Interface com tipografia refinada e arquitetura desacoplada, focada em leitura imersiva e tempo de carregamento instantâneo.
+              </p>
+            </div>
+            <div class="pt-6 mt-6 border-t border-white/5 flex items-center justify-between font-mono text-xs text-neutral-400">
+              <span>Tailwind • JS • API</span>
+              <span class="group-hover:translate-x-1 transition-transform text-emerald-400">→</span>
+            </div>
+          </article>
+
+          <!-- Projeto 2 -->
+          <article class="border-gradient-subtle bg-[#121212]/90 rounded-xl p-6 flex flex-col justify-between group">
+            <div class="space-y-4">
+              <div class="flex items-center justify-between text-xs font-mono text-neutral-400">
+                <span>02 / E-COMMERCE</span>
+                <span class="text-emerald-400">2026</span>
+              </div>
+              <h3 class="font-serif text-2xl text-white group-hover:text-emerald-400 transition-colors">
+                Studio Minimal
+              </h3>
+              <p class="text-neutral-400 text-sm leading-relaxed">
+                Experiência de comércio eletrônico com catálogo conceitual, paleta escura suave e microinterações intuitivas.
+              </p>
+            </div>
+            <div class="pt-6 mt-6 border-t border-white/5 flex items-center justify-between font-mono text-xs text-neutral-400">
+              <span>UI Design • Frontend</span>
+              <span class="group-hover:translate-x-1 transition-transform text-emerald-400">→</span>
+            </div>
+          </article>
+
+          <!-- Projeto 3 -->
+          <article class="border-gradient-subtle bg-[#121212]/90 rounded-xl p-6 flex flex-col justify-between group">
+            <div class="space-y-4">
+              <div class="flex items-center justify-between text-xs font-mono text-neutral-400">
+                <span>03 / SISTEMA DESIGN</span>
+                <span class="text-emerald-400">2026</span>
+              </div>
+              <h3 class="font-serif text-2xl text-white group-hover:text-emerald-400 transition-colors">
+                Design System Core
+              </h3>
+              <p class="text-neutral-400 text-sm leading-relaxed">
+                Conjunto de componentes reutilizáveis acessíveis, tipografia modular e tokens para produtos web escaláveis.
+              </p>
+            </div>
+            <div class="pt-6 mt-6 border-t border-white/5 flex items-center justify-between font-mono text-xs text-neutral-400">
+              <span>Acessibilidade • CSS</span>
+              <span class="group-hover:translate-x-1 transition-transform text-emerald-400">→</span>
+            </div>
+          </article>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         5. SEÇÃO HABILIDADES / STACK
+         ========================================================================= -->
+    <section id="habilidades" class="py-24 border-t border-white/5 relative">
+      <div class="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
+        
+        <div class="mb-14">
+          <span class="font-mono text-xs uppercase tracking-widest text-emerald-400 font-semibold block mb-2">
+            ( 03 ) Competências
+          </span>
+          <h2 class="font-serif text-3xl sm:text-4xl text-white font-normal">
+            Tecnologias & Habilidades
+          </h2>
+        </div>
+
+        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
+          
+          <div class="p-4 rounded-xl bg-[#121212] border border-white/5 hover:border-emerald-500/30 transition-colors text-center">
+            <span class="font-mono text-xs text-emerald-400 block mb-1">01</span>
+            <span class="font-medium text-white text-sm">HTML5 Semântico</span>
+          </div>
+
+          <div class="p-4 rounded-xl bg-[#121212] border border-white/5 hover:border-emerald-500/30 transition-colors text-center">
+            <span class="font-mono text-xs text-emerald-400 block mb-1">02</span>
+            <span class="font-medium text-white text-sm">Tailwind CSS</span>
+          </div>
+
+          <div class="p-4 rounded-xl bg-[#121212] border border-white/5 hover:border-emerald-500/30 transition-colors text-center">
+            <span class="font-mono text-xs text-emerald-400 block mb-1">03</span>
+            <span class="font-medium text-white text-sm">JavaScript (ES6+)</span>
+          </div>
+
+          <div class="p-4 rounded-xl bg-[#121212] border border-white/5 hover:border-emerald-500/30 transition-colors text-center">
+            <span class="font-mono text-xs text-emerald-400 block mb-1">04</span>
+            <span class="font-medium text-white text-sm">Design Responsivo</span>
+          </div>
+
+          <div class="p-4 rounded-xl bg-[#121212] border border-white/5 hover:border-emerald-500/30 transition-colors text-center">
+            <span class="font-mono text-xs text-emerald-400 block mb-1">05</span>
+            <span class="font-medium text-white text-sm">UI/UX Editorial</span>
+          </div>
+
+          <div class="p-4 rounded-xl bg-[#121212] border border-white/5 hover:border-emerald-500/30 transition-colors text-center">
+            <span class="font-mono text-xs text-emerald-400 block mb-1">06</span>
+            <span class="font-medium text-white text-sm">Web Performance</span>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         6. SEÇÃO CONTATO (CALL TO ACTION EDITORIAL)
+         ========================================================================= -->
+    <section id="contato" class="py-24 border-t border-white/5 bg-gradient-to-b from-[#0a0a0a] to-[#0f1712] relative overflow-hidden">
+      <div class="max-w-4xl mx-auto px-6 sm:px-8 text-center space-y-8">
+        
+        <span class="font-mono text-xs uppercase tracking-widest text-emerald-400 font-semibold block">
+          ( 04 ) Contato
+        </span>
+
+        <h2 class="font-serif text-4xl sm:text-5xl md:text-6xl text-white font-normal leading-tight">
+          Vamos construir algo <br>
+          <span class="italic text-emerald-400">extraordinário</span> juntos?
+        </h2>
+
+        <p class="font-sans text-neutral-300 text-base sm:text-lg max-w-xl mx-auto font-light leading-relaxed">
+          Estou disponível para projetos freelance, consultorias frontend ou oportunidades full-time.
+        </p>
+
+        <div class="pt-4 flex flex-col sm:flex-row items-center justify-center gap-4">
+          <a href="mailto:contato@wandry.dev" class="btn-primary-green inline-flex items-center gap-3 px-8 py-4 rounded-full font-sans font-semibold text-sm tracking-wide">
+            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+            </svg>
+            <span>contato@wandry.dev</span>
+          </a>
+
+          <a href="#hero" class="btn-secondary-outline inline-flex items-center gap-2 px-8 py-4 rounded-full font-sans font-medium text-sm">
+            <span>Voltar ao Topo ↑</span>
+          </a>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <!-- =========================================================================
+       7. RODAPÉ EDITORIAL
+       ========================================================================= -->
+  <footer class="border-t border-white/5 py-8 bg-[#0a0a0a]">
+    <div class="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 flex flex-col sm:flex-row items-center justify-between gap-4 font-mono text-xs text-neutral-400">
+      <div class="flex items-center gap-2">
+        <span class="text-white font-serif font-bold text-sm">Wandry</span>
+        <span>© 2026. Todos os direitos reservados.</span>
+      </div>
+      <div>
+        <span>Design Editorial & Minimalista com <span class="text-emerald-400">Tailwind CSS</span></span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Script Principal -->
+  <script src="js/main.js"></script>
+</body>
+</html>

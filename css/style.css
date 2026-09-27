@@ -1,0 +1,157 @@
+/* ==========================================================================
+   PORTFÓLIO WANDRY - EDITORIAL MINIMALISTA
+   Tema Escuro (#0a0a0a) com Acentos Esmeralda / Verde
+   ========================================================================== */
+
+/* Importação de fontes caso o link externo falhe */
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500&display=swap');
+
+:root {
+  --bg-primary: #0a0a0a;
+  --bg-surface: #121212;
+  --bg-surface-elevated: #171717;
+  --accent-green: #10b981;
+  --accent-green-light: #34d399;
+  --accent-green-glow: rgba(16, 185, 129, 0.18);
+  --text-muted: #888888;
+  --border-subtle: rgba(255, 255, 255, 0.07);
+}
+
+/* Suavização de rolagem e fontes */
+html {
+  scroll-behavior: smooth;
+  color-scheme: dark;
+  background-color: var(--bg-primary);
+}
+
+body {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  background-color: var(--bg-primary);
+  color: #ededed;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Tipografia Editorial */
+.font-editorial {
+  font-family: 'Playfair Display', Georgia, serif;
+}
+
+.font-editorial-alt {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+}
+
+.font-mono-code {
+  font-family: 'JetBrains Mono', monospace;
+}
+
+/* Scrollbar estilizada minimalista */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0a0a0a;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #262626;
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #10b981;
+}
+
+/* Seleção de texto com verde neon suave */
+::selection {
+  background-color: #10b981;
+  color: #0a0a0a;
+}
+
+/* Efeito de ruído/granulação de fundo sutil para sensação editorial */
+.editorial-grid-bg {
+  background-size: 60px 60px;
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+}
+
+/* Brilho radial de fundo */
+.ambient-glow {
+  position: absolute;
+  width: 550px;
+  height: 550px;
+  border-radius: 50%;
+  filter: blur(120px);
+  pointer-events: none;
+  opacity: 0.15;
+  background: radial-gradient(circle, #10b981 0%, rgba(5, 150, 105, 0) 70%);
+}
+
+/* Efeitos de borda com gradiente sutil */
+.border-gradient-subtle {
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  transition: border-color 0.4s ease, box-shadow 0.4s ease;
+}
+
+.border-gradient-subtle:hover {
+  border-color: rgba(16, 185, 129, 0.35);
+  box-shadow: 0 10px 30px -10px rgba(16, 185, 129, 0.12);
+}
+
+/* Botões Editoriais */
+.btn-primary-green {
+  background: #10b981;
+  color: #051a11;
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 0 25px rgba(16, 185, 129, 0.25);
+}
+
+.btn-primary-green:hover {
+  background: #34d399;
+  transform: translateY(-2px);
+  box-shadow: 0 0 35px rgba(16, 185, 129, 0.45);
+}
+
+.btn-secondary-outline {
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.02);
+  color: #d1d5db;
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.btn-secondary-outline:hover {
+  border-color: rgba(16, 185, 129, 0.4);
+  background: rgba(16, 185, 129, 0.05);
+  color: #ffffff;
+  transform: translateY(-2px);
+}
+
+/* Animação suave para badge pulsante */
+@keyframes pulseSlow {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+  50% {
+    transform: scale(1.15);
+    opacity: 1;
+  }
+}
+
+.animate-pulse-slow {
+  animation: pulseSlow 2.5s infinite ease-in-out;
+}
+
+/* Transições refinadas de navbar */
+.nav-scrolled {
+  background-color: rgba(10, 10, 10, 0.88) !important;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+  padding-top: 1rem !important;
+  padding-bottom: 1rem !important;
+  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+}
