@@ -61,27 +61,22 @@
       return new THREE.Vector3(x, y, z);
     }
 
-    // 5. Esfera Base Translúcida (Oceano Escuro com Reflexo Esmeralda)
+    // 5. Esfera Base Branca Minimalista (Acabamento Fosco / Acetinado)
     const baseSphereGeometry = new THREE.SphereGeometry(GLOBE_RADIUS, 64, 64);
-    const baseSphereMaterial = new THREE.MeshPhysicalMaterial({
-      color: 0x07110d,
-      emissive: 0x02170f,
-      roughness: 0.25,
-      metalness: 0.2,
-      clearcoat: 0.8,
-      clearcoatRoughness: 0.15,
-      transparent: true,
-      opacity: 0.92
+    const baseSphereMaterial = new THREE.MeshStandardMaterial({
+      color: 0xfafafa,              // Branco puro sofisticado
+      roughness: 0.35,              // Difusão suave da sombra 3D
+      metalness: 0.05
     });
     const baseSphere = new THREE.Mesh(baseSphereGeometry, baseSphereMaterial);
     globeGroup.add(baseSphere);
 
-    // 6. Grade Editorial de Paralelos e Meridianos (Graticule Sutil)
+    // 6. Grade Editorial de Paralelos e Meridianos (Graticule Sutil em Cinza)
     const graticuleGroup = new THREE.Group();
     const ringMaterial = new THREE.LineBasicMaterial({
-      color: 0x10b981,
+      color: 0xd4d4d8,
       transparent: true,
-      opacity: 0.09
+      opacity: 0.4
     });
 
     [-60, -30, 0, 30, 60].forEach((lat) => {
@@ -101,7 +96,7 @@
     });
     globeGroup.add(graticuleGroup);
 
-    // 7. Matriz de Pontos dos Continentes (Dotted Matrix Earth)
+    // 7. Matriz de Pontos dos Continentes (Dotted Matrix Earth - Grafite Escuro)
     const landCoords = window.GLOBE_LAND_COORDS || [];
     const dotCount = landCoords.length;
 
@@ -120,21 +115,21 @@
 
       dotsGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
 
-      // Material de pontos em verde esmeralda vibrante
+      // Material de pontos dos países em verde esmeralda sobre o globo branco
       const dotsMaterial = new THREE.PointsMaterial({
-        color: 0x10b981,
-        size: 0.038,
+        color: 0x059669,
+        size: 0.044,
         transparent: true,
-        opacity: 0.88,
-        blending: THREE.AdditiveBlending
+        opacity: 0.96,
+        blending: THREE.NormalBlending
       });
 
       const landDots = new THREE.Points(dotsGeometry, dotsMaterial);
       globeGroup.add(landDots);
     }
 
-    // 8. Halo / Brilho de Atmosfera ao Redor do Globo
-    const atmosphereGeometry = new THREE.SphereGeometry(GLOBE_RADIUS * 1.16, 64, 64);
+    // 8. Halo / Brilho de Atmosfera ao Redor do Globo Branco
+    const atmosphereGeometry = new THREE.SphereGeometry(GLOBE_RADIUS * 1.14, 64, 64);
     const atmosphereMaterial = new THREE.ShaderMaterial({
       vertexShader: `
         varying vec3 vNormal;
@@ -146,8 +141,8 @@
       fragmentShader: `
         varying vec3 vNormal;
         void main() {
-          float intensity = pow(0.68 - dot(vNormal, vec3(0, 0, 1.0)), 2.2);
-          gl_FragColor = vec4(0.063, 0.725, 0.505, 1.0) * intensity * 1.35;
+          float intensity = pow(0.65 - dot(vNormal, vec3(0, 0, 1.0)), 2.2);
+          gl_FragColor = vec4(0.92, 0.95, 0.93, 1.0) * intensity * 0.7;
         }
       `,
       blending: THREE.AdditiveBlending,
@@ -278,7 +273,7 @@
 
       // Pin secundário
       const secPinGeo = new THREE.SphereGeometry(0.03, 12, 12);
-      const secPinMat = new THREE.MeshBasicMaterial({ color: 0xa7f3d0 });
+      const secPinMat = new THREE.MeshBasicMaterial({ color: 0x059669 });
       const secPin = new THREE.Mesh(secPinGeo, secPinMat);
       secPin.position.copy(posCity);
       globeGroup.add(secPin);
@@ -303,24 +298,29 @@
       const curvePoints = curve.getPoints(45);
       const arcGeo = new THREE.BufferGeometry().setFromPoints(curvePoints);
       const arcMat = new THREE.LineBasicMaterial({
-        color: 0x34d399,
+        color: 0x10b981,
         transparent: true,
-        opacity: 0.55
+        opacity: 0.85
       });
       const arcLine = new THREE.Line(arcGeo, arcMat);
       arcsGroup.add(arcLine);
     });
 
-    // 10. Iluminação
-    const keyLight = new THREE.DirectionalLight(0x10b981, 2.8);
-    keyLight.position.set(5, 4, 4);
+    // 10. Iluminação para o Globo Branco
+    const keyLight = new THREE.DirectionalLight(0xffffff, 1.8);
+    keyLight.position.set(5, 5, 4);
     scene.add(keyLight);
 
-    const fillLight = new THREE.DirectionalLight(0x34d399, 1.2);
+    const fillLight = new THREE.DirectionalLight(0xf1f5f9, 0.9);
     fillLight.position.set(-5, -2, 2);
     scene.add(fillLight);
 
-    const ambientLight = new THREE.AmbientLight(0x0a2215, 2.2);
+    // Rim light esmeralda sutil na borda oposta
+    const rimLight = new THREE.DirectionalLight(0x10b981, 0.5);
+    rimLight.position.set(-3, -4, -3);
+    scene.add(rimLight);
+
+    const ambientLight = new THREE.AmbientLight(0xffffff, 0.85);
     scene.add(ambientLight);
 
     // 11. Interatividade do Usuário (Mouse, Touch, Drag com Inércia e Parallax)
@@ -333,7 +333,6 @@
 
     let isDragging = false;
     let previousPointer = { x: 0, y: 0 };
-    let dragVelocityX = 0;
     let dragVelocityY = 0;
 
     function onMouseMove(e) {
@@ -358,10 +357,8 @@
 
       if (isDragging) {
         const deltaX = pageX - previousPointer.x;
-        const deltaY = pageY - previousPointer.y;
-
-        dragVelocityY += deltaX * 0.005;
-        dragVelocityX += deltaY * 0.005;
+        // Rotação precisa e fluida no eixo Y
+        dragVelocityY += deltaX * 0.0075;
 
         previousPointer = { x: pageX, y: pageY };
       } else {
@@ -439,15 +436,17 @@
       currentParallaxX += (targetParallaxX - currentParallaxX) * 0.05;
       currentParallaxY += (targetParallaxY - currentParallaxY) * 0.05;
 
-      // Aplica rotação por arraste manual
+      // Aplica rotação manual no eixo Y com amortecimento inercial suave
       globeGroup.rotation.y += dragVelocityY;
-      globeGroup.rotation.x += dragVelocityX;
+      dragVelocityY *= 0.92;
 
-      dragVelocityX *= 0.93;
-      dragVelocityY *= 0.93;
+      // Auto-rotação contínua no eixo Y (pausada durante arraste ativo para controle total)
+      if (!isDragging) {
+        globeGroup.rotation.y += 0.003;
+      }
 
-      // Auto-rotação sutil e contínua do globo terrestre
-      globeGroup.rotation.y += 0.0035;
+      // Mantém a inclinação axial elegante fixa no eixo X
+      globeGroup.rotation.x = 0.28;
 
       // Parallax sutil somado à posição da câmera
       camera.position.x = currentParallaxY * 0.7;
