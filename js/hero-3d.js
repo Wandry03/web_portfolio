@@ -1,15 +1,19 @@
 /**
  * HERO 3D SCENE - WANDRY PORTFOLIO
- * Globo Terrestre Interativo com Matriz de Pontos (Dotted Earth Globe)
+ * Globo Terrestre 3D Interativo com Matriz de Continentes & Cidades Globais
  * Destaque especial na cidade de Diamantina - MG (Brasil)
- * Arcos de conexão, balões informativos (badges), auto-rotação e parallax
- * Desenvolvido com Three.js e otimizado para 60 FPS
+ * Desenvolvido com Three.js - 100% Responsivo e Otimizado para Mobile e Desktop (60 FPS)
  */
 
 (function () {
   'use strict';
 
-  document.addEventListener('DOMContentLoaded', initHeroGlobe);
+  // Garante inicialização mesmo se o DOM já estiver pronto no GitHub Pages
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initHeroGlobe);
+  } else {
+    initHeroGlobe();
+  }
 
   function initHeroGlobe() {
     const container = document.getElementById('hero-canvas-container');
@@ -20,28 +24,62 @@
       return;
     }
 
-    // 1. Dimensões
-    let width = container.clientWidth;
-    let height = container.clientHeight;
+    // 1. Função defensiva de obtenção de dimensões (evita 0x0 em inicialização mobile / reflows)
+    function getValidDimensions() {
+      const rect = container.getBoundingClientRect();
+      let w = rect.width || container.clientWidth || container.offsetWidth;
+      let h = rect.height || container.clientHeight || container.offsetHeight;
+
+      // Fallbacks defensivos se o CSS ainda estiver calculando estilos
+      if (!w || w < 20) {
+        w = Math.max(window.innerWidth - 32, 280);
+      }
+      if (!h || h < 20) {
+        h = window.innerWidth < 640 ? 290 : 380;
+      }
+      return { width: Math.round(w), height: Math.round(h) };
+    }
+
+    let { width, height } = getValidDimensions();
 
     // 2. Cena & Câmera
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(42, width / height, 0.1, 100);
     camera.position.set(0, 0, 5.8);
 
-    // 3. Renderizador WebGL
+    // 3. Renderizador WebGL com Configuração Segura
     const renderer = new THREE.WebGLRenderer({
       canvas: canvas,
       alpha: true,
       antialias: true,
       powerPreference: 'high-performance'
     });
-    renderer.setSize(width, height);
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+    renderer.setSize(width, height, false);
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
-    renderer.toneMappingExposure = 1.2;
+    renderer.toneMappingExposure = 1.25;
 
-    // 4. Grupo Raiz do Globo (permite rotação global e controle de posição)
+    // 4. Iluminação Imediata (Ambiente + Hemisférica + Direcional + Rim)
+    // Inserida no topo da cena para garantir que a geometria nunca fique escura
+    const ambientLight = new THREE.AmbientLight(0xffffff, 1.15);
+    scene.add(ambientLight);
+
+    const hemiLight = new THREE.HemisphereLight(0xffffff, 0x1e293b, 1.0);
+    scene.add(hemiLight);
+
+    const keyLight = new THREE.DirectionalLight(0xffffff, 2.2);
+    keyLight.position.set(6, 6, 5);
+    scene.add(keyLight);
+
+    const fillLight = new THREE.DirectionalLight(0xf1f5f9, 1.0);
+    fillLight.position.set(-6, -2, 3);
+    scene.add(fillLight);
+
+    const rimLight = new THREE.DirectionalLight(0x10b981, 0.6);
+    rimLight.position.set(-4, -5, -4);
+    scene.add(rimLight);
+
+    // 5. Grupo Raiz do Globo
     const globeGroup = new THREE.Group();
     scene.add(globeGroup);
 
@@ -61,22 +99,22 @@
       return new THREE.Vector3(x, y, z);
     }
 
-    // 5. Esfera Base Branca Minimalista (Acabamento Fosco / Acetinado)
+    // 6. Esfera Base Branca Minimalista (Acabamento Fosco / Acetinado)
     const baseSphereGeometry = new THREE.SphereGeometry(GLOBE_RADIUS, 64, 64);
     const baseSphereMaterial = new THREE.MeshStandardMaterial({
-      color: 0xfafafa,              // Branco puro sofisticado
+      color: 0xf8fafc,              // Branco acetinado sofisticado
       roughness: 0.35,              // Difusão suave da sombra 3D
       metalness: 0.05
     });
     const baseSphere = new THREE.Mesh(baseSphereGeometry, baseSphereMaterial);
     globeGroup.add(baseSphere);
 
-    // 6. Grade Editorial de Paralelos e Meridianos (Graticule Sutil em Cinza)
+    // 7. Grade Editorial de Paralelos e Meridianos (Graticule Sutil)
     const graticuleGroup = new THREE.Group();
     const ringMaterial = new THREE.LineBasicMaterial({
       color: 0xd4d4d8,
       transparent: true,
-      opacity: 0.4
+      opacity: 0.38
     });
 
     [-60, -30, 0, 30, 60].forEach((lat) => {
@@ -96,8 +134,31 @@
     });
     globeGroup.add(graticuleGroup);
 
-    // 7. Matriz de Pontos dos Continentes (Dotted Matrix Earth - Grafite Escuro)
-    const landCoords = window.GLOBE_LAND_COORDS || [];
+    // 8. Matriz de Pontos dos Continentes (Dotted Earth)
+    // Com fallback procedimental defensivo caso globe-data.js demore para carregar
+    function getLandCoordinates() {
+      if (window.GLOBE_LAND_COORDS && Array.isArray(window.GLOBE_LAND_COORDS) && window.GLOBE_LAND_COORDS.length > 0) {
+        return window.GLOBE_LAND_COORDS;
+      }
+      // Fallback procedural de alta densidade
+      const fallback = [];
+      for (let lat = -60; lat <= 70; lat += 2.5) {
+        const step = 2.5 / Math.cos((lat * Math.PI) / 180);
+        for (let lon = -180; lon < 180; lon += Math.max(step, 3)) {
+          const isLand =
+            (lon >= -125 && lon <= -35 && lat >= -55 && lat <= 65) || // Américas
+            (lon >= -15 && lon <= 50 && lat >= -35 && lat <= 38) ||    // África
+            (lon >= -10 && lon <= 145 && lat >= 10 && lat <= 70) ||   // Eurásia
+            (lon >= 110 && lon <= 155 && lat >= -40 && lat <= -10);   // Oceania
+          if (isLand && Math.sin(lat * 5) + Math.cos(lon * 5) > -0.6) {
+            fallback.push([lat, lon]);
+          }
+        }
+      }
+      return fallback;
+    }
+
+    const landCoords = getLandCoordinates();
     const dotCount = landCoords.length;
 
     if (dotCount > 0) {
@@ -115,7 +176,7 @@
 
       dotsGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
 
-      // Material de pontos dos países em verde esmeralda sobre o globo branco
+      // Material dos pontos em verde esmeralda vibrante
       const dotsMaterial = new THREE.PointsMaterial({
         color: 0x059669,
         size: 0.044,
@@ -128,7 +189,8 @@
       globeGroup.add(landDots);
     }
 
-    // 8. Halo / Brilho de Atmosfera ao Redor do Globo Branco
+    // 9. Halo / Brilho de Atmosfera ao Redor do Globo
+    // Correção GLSL: clamp() evita valores negativos passados para pow(), eliminando NaN em GPUs mobile
     const atmosphereGeometry = new THREE.SphereGeometry(GLOBE_RADIUS * 1.14, 64, 64);
     const atmosphereMaterial = new THREE.ShaderMaterial({
       vertexShader: `
@@ -141,19 +203,21 @@
       fragmentShader: `
         varying vec3 vNormal;
         void main() {
-          float intensity = pow(0.65 - dot(vNormal, vec3(0, 0, 1.0)), 2.2);
-          gl_FragColor = vec4(0.92, 0.95, 0.93, 1.0) * intensity * 0.7;
+          float d = dot(vNormal, vec3(0.0, 0.0, 1.0));
+          float intensity = pow(clamp(0.65 - d, 0.0, 1.0), 2.2);
+          gl_FragColor = vec4(0.92, 0.96, 0.94, 1.0) * intensity * 0.7;
         }
       `,
       blending: THREE.AdditiveBlending,
       side: THREE.BackSide,
-      transparent: true
+      transparent: true,
+      depthWrite: false
     });
     const atmosphere = new THREE.Mesh(atmosphereGeometry, atmosphereMaterial);
     scene.add(atmosphere);
 
-    // 9. Cidade Principal: DIAMANTINA - MG (BRASIL)
-    // Coordenadas reais: Latitude: -18.2439, Longitude: -43.6033
+    // 10. Cidade Principal: DIAMANTINA - MG (BRASIL)
+    // Coordenadas geográficas reais: Latitude: -18.2439, Longitude: -43.6033
     const DIAMANTINA = {
       name: 'DIAMANTINA - MG',
       tag: '📍 HUB PRINCIPAL',
@@ -162,27 +226,31 @@
       isMain: true
     };
 
-    // Cidades secundárias para conexão global (como na imagem de referência)
+    // Cidades representando cada um dos continentes do planeta, conectadas a Diamantina
     const GLOBAL_CITIES = [
-      { name: 'SÃO PAULO', tag: 'BRASIL', lat: -23.5505, lon: -46.6333 },
-      { name: 'NEW YORK', tag: 'USA', lat: 40.7128, lon: -74.006 },
-      { name: 'LONDON', tag: 'UK', lat: 51.5074, lon: -0.1278 }
+      { name: 'SÃO PAULO', tag: 'AMÉRICA DO SUL', lat: -23.5505, lon: -46.6333 },
+      { name: 'NEW YORK', tag: 'AMÉRICA DO NORTE', lat: 40.7128, lon: -74.006 },
+      { name: 'LONDRES', tag: 'EUROPA', lat: 51.5074, lon: -0.1278 },
+      { name: 'TÓQUIO', tag: 'ÁSIA', lat: 35.6762, lon: 139.6503 },
+      { name: 'CAIRO', tag: 'ÁFRICA', lat: 30.0444, lon: 31.2357 },
+      { name: 'SYDNEY', tag: 'OCEANIA', lat: -33.8688, lon: 151.2093 },
+      { name: 'ANTÁRTIDA', tag: 'POLO SUL', lat: -62.0844, lon: -58.3939 }
     ];
 
-    // Criador de Badges / Rótulos em 3D (Sprites de Alta Resolução)
+    // Criador de Badges / Rótulos em 3D (Sprites com CanvasTexture Otimizada)
     function createLocationBadge(title, subtitle, isMain = false) {
       const c = document.createElement('canvas');
-      c.width = 380;
+      c.width = 440;
       c.height = 110;
       const ctx = c.getContext('2d');
 
       // Fundo em cápsula com estilo Glassmorphism
-      ctx.fillStyle = isMain ? 'rgba(4, 38, 20, 0.94)' : 'rgba(14, 14, 14, 0.9)';
+      ctx.fillStyle = isMain ? 'rgba(4, 38, 20, 0.94)' : 'rgba(14, 14, 14, 0.92)';
       ctx.strokeStyle = isMain ? '#10b981' : 'rgba(255, 255, 255, 0.28)';
       ctx.lineWidth = isMain ? 4 : 2;
 
       // Desenha retângulo arredondado seguro
-      const x = 6, y = 6, w = 368, h = 98, r = 24;
+      const x = 6, y = 6, w = 428, h = 98, r = 24;
       ctx.beginPath();
       ctx.moveTo(x + r, y);
       ctx.lineTo(x + w - r, y);
@@ -197,19 +265,27 @@
       ctx.fill();
       ctx.stroke();
 
-      // Texto Principal
-      ctx.font = 'bold 30px "Plus Jakarta Sans", sans-serif';
+      // Ponto luminoso indicador
+      ctx.beginPath();
+      ctx.arc(isMain ? 34 : 38, 55, 5.5, 0, Math.PI * 2);
+      ctx.fillStyle = isMain ? '#34d399' : '#10b981';
+      ctx.fill();
+
+      // Texto Principal (Nome da Cidade)
+      ctx.font = 'bold 28px "Plus Jakarta Sans", sans-serif';
       ctx.fillStyle = '#ffffff';
       ctx.textAlign = 'center';
-      ctx.fillText(title, 190, 50);
+      ctx.fillText(title, 228, 48);
 
-      // Subtítulo
-      ctx.font = '600 20px "JetBrains Mono", monospace';
+      // Subtítulo (Continente ou tag)
+      ctx.font = '600 17px "JetBrains Mono", monospace';
       ctx.fillStyle = isMain ? '#34d399' : '#a3a3a3';
-      ctx.fillText(subtitle, 190, 84);
+      ctx.fillText(subtitle, 228, 82);
 
       const texture = new THREE.CanvasTexture(c);
       texture.minFilter = THREE.LinearFilter;
+      texture.generateMipmaps = false;
+
       const spriteMaterial = new THREE.SpriteMaterial({
         map: texture,
         transparent: true,
@@ -217,11 +293,11 @@
       });
 
       const sprite = new THREE.Sprite(spriteMaterial);
-      sprite.scale.set(isMain ? 1.35 : 1.15, isMain ? 0.39 : 0.33, 1);
+      sprite.scale.set(isMain ? 1.35 : 1.15, isMain ? 0.34 : 0.29, 1);
       return sprite;
     }
 
-    // Array de marcadores para atualização de visibilidade (fading ao girar pro lado oposto)
+    // Array de marcadores para fading ao girar para o verso da esfera
     const markersToTrack = [];
 
     // Adiciona o Marcador Principal de Diamantina
@@ -237,12 +313,12 @@
     // Haste vertical de luz
     const stemEnd = latLonToVec3(DIAMANTINA.lat, DIAMANTINA.lon, GLOBE_RADIUS * 1.2);
     const stemGeo = new THREE.BufferGeometry().setFromPoints([posDiamantina, stemEnd]);
-    const stemMat = new THREE.LineBasicMaterial({ color: 0x10b981, transparent: true, opacity: 0.8 });
+    const stemMat = new THREE.LineBasicMaterial({ color: 0x10b981, transparent: true, opacity: 0.85 });
     const stemLine = new THREE.Line(stemGeo, stemMat);
     globeGroup.add(stemLine);
 
-    // Anel pulsante de radar em Diamantina
-    const ringGeo = new THREE.RingGeometry(0.04, 0.12, 32);
+    // Anéis pulsantes concêntricos em Diamantina
+    const ringGeo = new THREE.RingGeometry(0.05, 0.09, 32);
     const ringMat = new THREE.MeshBasicMaterial({
       color: 0x10b981,
       side: THREE.DoubleSide,
@@ -251,12 +327,12 @@
     });
     const pulseRing = new THREE.Mesh(ringGeo, ringMat);
     pulseRing.position.copy(posDiamantina);
-    pulseRing.lookAt(posDiamantina.clone().multiplyScalar(2));
+    pulseRing.lookAt(new THREE.Vector3(0, 0, 0));
     globeGroup.add(pulseRing);
 
-    // Badge de Diamantina
+    // Badge informativo de Diamantina
     const badgeDiamantina = createLocationBadge(DIAMANTINA.name, DIAMANTINA.tag, true);
-    badgeDiamantina.position.copy(latLonToVec3(DIAMANTINA.lat, DIAMANTINA.lon, GLOBE_RADIUS * 1.32));
+    badgeDiamantina.position.copy(latLonToVec3(DIAMANTINA.lat, DIAMANTINA.lon, GLOBE_RADIUS * 1.28));
     globeGroup.add(badgeDiamantina);
 
     markersToTrack.push({
@@ -264,19 +340,30 @@
       elements: [badgeDiamantina, pinMesh, stemLine, pulseRing]
     });
 
-    // Adiciona Cidades Globais e Arcos de Conexão
+    // Grupo para Arcos de Conexão Globais
     const arcsGroup = new THREE.Group();
     globeGroup.add(arcsGroup);
 
     GLOBAL_CITIES.forEach((city) => {
       const posCity = latLonToVec3(city.lat, city.lon, GLOBE_RADIUS * 1.01);
 
-      // Pin secundário
+      // Pin da cidade secundária
       const secPinGeo = new THREE.SphereGeometry(0.03, 12, 12);
-      const secPinMat = new THREE.MeshBasicMaterial({ color: 0x059669 });
+      const secPinMat = new THREE.MeshBasicMaterial({ color: 0x10b981 });
       const secPin = new THREE.Mesh(secPinGeo, secPinMat);
       secPin.position.copy(posCity);
       globeGroup.add(secPin);
+
+      // Haste vertical
+      const secStemEnd = latLonToVec3(city.lat, city.lon, GLOBE_RADIUS * 1.18);
+      const secStemGeo = new THREE.BufferGeometry().setFromPoints([posCity, secStemEnd]);
+      const secStemMat = new THREE.LineBasicMaterial({
+        color: 0x10b981,
+        transparent: true,
+        opacity: 0.65
+      });
+      const secStemLine = new THREE.Line(secStemGeo, secStemMat);
+      globeGroup.add(secStemLine);
 
       // Badge secundário
       const secBadge = createLocationBadge(city.name, city.tag, false);
@@ -285,141 +372,175 @@
 
       markersToTrack.push({
         normalPos: posCity,
-        elements: [secBadge, secPin]
+        elements: [secBadge, secPin, secStemLine]
       });
 
-      // Arco Curvo conectando Diamantina à cidade global
-      const midPoint = new THREE.Vector3().addVectors(posDiamantina, posCity).multiplyScalar(0.5);
+      // Arco Curvo conectando Diamantina à cidade
+      let midPoint = new THREE.Vector3().addVectors(posDiamantina, posCity).multiplyScalar(0.5);
+
+      if (midPoint.lengthSq() < 0.25) {
+        let perp = new THREE.Vector3().crossVectors(posDiamantina, new THREE.Vector3(0, 1, 0));
+        if (perp.lengthSq() < 0.05) {
+          perp = new THREE.Vector3().crossVectors(posDiamantina, new THREE.Vector3(1, 0, 0));
+        }
+        perp.normalize().multiplyScalar(GLOBE_RADIUS * 0.9);
+        midPoint.add(perp);
+      }
+
       const dist = posDiamantina.distanceTo(posCity);
-      const arcHeight = GLOBE_RADIUS * (1.18 + dist * 0.12);
+      const arcHeight = GLOBE_RADIUS * (1.18 + Math.min(dist, 3.8) * 0.12);
       midPoint.normalize().multiplyScalar(arcHeight);
 
       const curve = new THREE.QuadraticBezierCurve3(posDiamantina, midPoint, posCity);
-      const curvePoints = curve.getPoints(45);
+      const curvePoints = curve.getPoints(50);
       const arcGeo = new THREE.BufferGeometry().setFromPoints(curvePoints);
       const arcMat = new THREE.LineBasicMaterial({
         color: 0x10b981,
         transparent: true,
-        opacity: 0.85
+        opacity: 0.75
       });
       const arcLine = new THREE.Line(arcGeo, arcMat);
       arcsGroup.add(arcLine);
     });
 
-    // 10. Iluminação para o Globo Branco
-    const keyLight = new THREE.DirectionalLight(0xffffff, 1.8);
-    keyLight.position.set(5, 5, 4);
-    scene.add(keyLight);
+    // 11. Interatividade do Usuário (Mouse, Touch Suave & Parallax)
+    let isDragging = false;
+    let previousPointerX = 0;
+    let dragVelocityY = 0;
 
-    const fillLight = new THREE.DirectionalLight(0xf1f5f9, 0.9);
-    fillLight.position.set(-5, -2, 2);
-    scene.add(fillLight);
-
-    // Rim light esmeralda sutil na borda oposta
-    const rimLight = new THREE.DirectionalLight(0x10b981, 0.5);
-    rimLight.position.set(-3, -4, -3);
-    scene.add(rimLight);
-
-    const ambientLight = new THREE.AmbientLight(0xffffff, 0.85);
-    scene.add(ambientLight);
-
-    // 11. Interatividade do Usuário (Mouse, Touch, Drag com Inércia e Parallax)
-    let mouseX = 0;
-    let mouseY = 0;
     let targetParallaxX = 0;
     let targetParallaxY = 0;
     let currentParallaxX = 0;
     let currentParallaxY = 0;
 
-    let isDragging = false;
-    let previousPointer = { x: 0, y: 0 };
-    let dragVelocityY = 0;
-
-    function onMouseMove(e) {
-      const rect = container.getBoundingClientRect();
-      const nx = ((e.clientX - rect.left) / rect.width) * 2 - 1;
-      const ny = -(((e.clientY - rect.top) / rect.height) * 2 - 1);
-
-      targetParallaxY = Math.max(-1.2, Math.min(1.2, nx)) * 0.45;
-      targetParallaxX = -Math.max(-1.2, Math.min(1.2, ny)) * 0.35;
-    }
-
-    function onPointerDown(e) {
+    function onPointerDown(clientX) {
       isDragging = true;
-      const pageX = e.touches ? e.touches[0].clientX : e.clientX;
-      const pageY = e.touches ? e.touches[0].clientY : e.clientY;
-      previousPointer = { x: pageX, y: pageY };
+      previousPointerX = clientX;
+      dragVelocityY = 0;
     }
 
-    function onPointerMove(e) {
-      const pageX = e.touches ? e.touches[0].clientX : e.clientX;
-      const pageY = e.touches ? e.touches[0].clientY : e.clientY;
-
-      if (isDragging) {
-        const deltaX = pageX - previousPointer.x;
-        // Rotação precisa e fluida no eixo Y
-        dragVelocityY += deltaX * 0.0075;
-
-        previousPointer = { x: pageX, y: pageY };
-      } else {
-        onMouseMove(e);
-      }
+    function onPointerMove(clientX) {
+      if (!isDragging) return;
+      const deltaX = clientX - previousPointerX;
+      previousPointerX = clientX;
+      dragVelocityY = deltaX * 0.006;
+      globeGroup.rotation.y += dragVelocityY;
     }
 
     function onPointerUp() {
       isDragging = false;
     }
 
-    window.addEventListener('mousemove', onMouseMove, { passive: true });
-    container.addEventListener('mousedown', onPointerDown, { passive: true });
-    window.addEventListener('mouseup', onPointerUp, { passive: true });
+    // Mouse Listeners
+    container.addEventListener('mousedown', (e) => onPointerDown(e.clientX));
+    window.addEventListener('mousemove', (e) => {
+      onPointerMove(e.clientX);
+      const halfW = window.innerWidth / 2;
+      const halfH = window.innerHeight / 2;
+      targetParallaxX = (e.clientX - halfW) / halfW;
+      targetParallaxY = (e.clientY - halfH) / halfH;
+    });
+    window.addEventListener('mouseup', onPointerUp);
 
-    container.addEventListener('touchstart', onPointerDown, { passive: true });
-    window.addEventListener('touchmove', onPointerMove, { passive: true });
+    // Touch Listeners (Mobile Otimizado)
+    container.addEventListener(
+      'touchstart',
+      (e) => {
+        if (e.touches.length === 1) {
+          onPointerDown(e.touches[0].clientX);
+        }
+      },
+      { passive: true }
+    );
+
+    window.addEventListener(
+      'touchmove',
+      (e) => {
+        if (isDragging && e.touches.length === 1) {
+          onPointerMove(e.touches[0].clientX);
+        }
+      },
+      { passive: true }
+    );
+
     window.addEventListener('touchend', onPointerUp, { passive: true });
+    window.addEventListener('touchcancel', onPointerUp, { passive: true });
 
-    // 12. Redimensionamento Responsivo
+    // 12. Redimensionamento Responsivo & Otimização de Performance
     const handleResize = () => {
-      if (!container) return;
-      width = container.clientWidth;
-      height = container.clientHeight;
+      if (!container || !renderer || !camera) return;
 
-      if (width === 0 || height === 0) return;
+      const dims = getValidDimensions();
+      width = dims.width;
+      height = dims.height;
 
+      // 1. Atualiza proporção da câmera
       camera.aspect = width / height;
       camera.updateProjectionMatrix();
 
-      if (width < 450) {
+      // 2. Ajuste de enquadramento da câmera conforme largura da tela
+      if (width < 380) {
         camera.position.z = 6.6;
+      } else if (width < 480) {
+        camera.position.z = 6.2;
+      } else if (width < 768) {
+        camera.position.z = 5.9;
       } else {
-        camera.position.z = 5.8;
+        camera.position.z = 5.6;
       }
 
-      renderer.setSize(width, height);
+      // 3. Pixel ratio otimizado para mobile (evita travamentos em telas de alta densidade)
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+
+      // 4. Ajuste dimensional do WebGLRenderer
+      renderer.setSize(width, height, false);
+
+      // 5. Renderiza imediatamente no resize
+      renderer.render(scene, camera);
     };
 
+    // Listeners de Redimensionamento e Orientação
     window.addEventListener('resize', handleResize, { passive: true });
+    window.addEventListener('orientationchange', handleResize, { passive: true });
+    window.addEventListener('load', handleResize);
+
+    if (window.ResizeObserver) {
+      const resizeObserver = new ResizeObserver(() => {
+        handleResize();
+      });
+      resizeObserver.observe(container);
+    }
+
+    // Gatilhos em múltiplos passos para acomodar renderização lenta de fontes e CSS no GitHub Pages
     handleResize();
+    requestAnimationFrame(handleResize);
+    setTimeout(handleResize, 60);
+    setTimeout(handleResize, 180);
+    setTimeout(handleResize, 450);
+    setTimeout(handleResize, 900);
 
     // 13. Relógio e Otimização com IntersectionObserver
     const clock = new THREE.Clock();
     let isVisible = true;
     let animationFrameId = null;
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        isVisible = entries[0].isIntersecting;
-        if (isVisible && !animationFrameId) {
-          clock.start();
-          animate();
-        } else if (!isVisible && animationFrameId) {
-          cancelAnimationFrame(animationFrameId);
-          animationFrameId = null;
-        }
-      },
-      { threshold: 0.05 }
-    );
-    observer.observe(container);
+    if ('IntersectionObserver' in window) {
+      const observer = new IntersectionObserver(
+        (entries) => {
+          if (!entries || !entries.length) return;
+          isVisible = entries[0].isIntersecting;
+          if (isVisible && !animationFrameId) {
+            clock.start();
+            animate();
+          } else if (!isVisible && animationFrameId) {
+            cancelAnimationFrame(animationFrameId);
+            animationFrameId = null;
+          }
+        },
+        { threshold: 0.05 }
+      );
+      observer.observe(container);
+    }
 
     // 14. Loop Principal de Animação e Renderização (60 FPS)
     const worldNormal = new THREE.Vector3();
@@ -429,7 +550,7 @@
       if (!isVisible) return;
       animationFrameId = requestAnimationFrame(animate);
 
-      const delta = clock.getDelta();
+      clock.getDelta();
       const elapsedTime = clock.getElapsedTime();
 
       // Suavização do Parallax e Inércia do Drag
@@ -440,12 +561,12 @@
       globeGroup.rotation.y += dragVelocityY;
       dragVelocityY *= 0.92;
 
-      // Auto-rotação contínua no eixo Y (pausada durante arraste ativo para controle total)
+      // Auto-rotação contínua no eixo Y (pausada durante arraste ativo)
       if (!isDragging) {
         globeGroup.rotation.y += 0.003;
       }
 
-      // Mantém a inclinação axial elegante fixa no eixo X
+      // Inclinação axial editorial fixa no eixo X
       globeGroup.rotation.x = 0.28;
 
       // Parallax sutil somado à posição da câmera
@@ -462,13 +583,9 @@
       camera.getWorldDirection(cameraDirection);
 
       markersToTrack.forEach((item) => {
-        // Converte o ponto do marcador para coordenadas globais
         worldNormal.copy(item.normalPos).applyMatrix4(globeGroup.matrixWorld).normalize();
-
-        // Produto escalar entre a normal da cidade e a direção da visão
         const dot = worldNormal.dot(cameraDirection);
 
-        // Se dot < -0.15, o ponto está voltado para a frente da câmera
         if (dot < -0.12) {
           const fade = Math.min(1.0, (-dot - 0.12) * 3.5);
           item.elements.forEach((el) => {
@@ -487,6 +604,9 @@
       renderer.render(scene, camera);
     }
 
+    // Renderiza o primeiro frame imediatamente para que a tela nunca fique preta
+    clock.start();
+    renderer.render(scene, camera);
     animate();
   }
 })();

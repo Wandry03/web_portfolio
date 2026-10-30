@@ -58,12 +58,12 @@
   <!-- =========================================================================
        1. MENU DE NAVEGAÇÃO FIXO NO TOPO
        ========================================================================= -->
-  <header id="main-navbar" class="fixed top-0 inset-x-0 z-50 py-6 transition-all duration-500 bg-[#0a0a0a]/70 backdrop-blur-md border-b border-white/5">
-    <div class="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 flex items-center justify-between">
+  <header id="main-navbar" class="fixed top-0 inset-x-0 z-50 py-4 sm:py-5 md:py-6 transition-all duration-500 bg-[#0a0a0a]/85 backdrop-blur-md border-b border-white/5">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12 flex items-center justify-between">
       
       <!-- Logotipo Editorial -->
       <a href="#hero" class="group flex items-baseline gap-1.5 focus:outline-none focus-visible:ring-1 focus-visible:ring-emerald-400" aria-label="Wandry - Página inicial">
-        <span class="font-serif text-2xl font-bold tracking-tight text-white group-hover:text-emerald-400 transition-colors duration-300">
+        <span class="font-serif text-xl sm:text-2xl font-bold tracking-tight text-white group-hover:text-emerald-400 transition-colors duration-300">
           Wandry
         </span>
         <span class="inline-block w-2 h-2 rounded-full bg-emerald-500 group-hover:scale-125 transition-transform duration-300"></span>
@@ -89,27 +89,48 @@
         </a>
       </div>
 
-      <!-- Botão do Menu Mobile (Hambúrguer) -->
-      <button id="mobile-menu-toggle" type="button" class="md:hidden p-2 text-neutral-300 hover:text-white focus:outline-none focus-visible:ring-1 focus-visible:ring-emerald-400 rounded-lg" aria-label="Abrir menu de navegação" aria-expanded="false">
-        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"/>
-        </svg>
+      <!-- Botão do Menu Mobile (Hambúrguer com Ícone Animado) -->
+      <button id="mobile-menu-toggle" type="button" class="md:hidden p-2 text-neutral-300 hover:text-white focus:outline-none focus-visible:ring-1 focus-visible:ring-emerald-400 rounded-lg relative w-10 h-10 flex items-center justify-center" aria-label="Abrir menu de navegação" aria-expanded="false">
+        <span class="sr-only">Menu de navegação</span>
+        <div class="w-6 h-4.5 flex flex-col justify-between items-center relative">
+          <span id="hamburger-line-1" class="w-6 h-0.5 bg-neutral-200 rounded-full transition-all duration-300 origin-center"></span>
+          <span id="hamburger-line-2" class="w-6 h-0.5 bg-neutral-200 rounded-full transition-all duration-300 my-1"></span>
+          <span id="hamburger-line-3" class="w-6 h-0.5 bg-neutral-200 rounded-full transition-all duration-300 origin-center"></span>
+        </div>
       </button>
 
     </div>
 
-    <!-- Menu Dropdown Mobile -->
-    <div id="mobile-menu" class="md:hidden opacity-0 pointer-events-none -translate-y-4 transition-all duration-300 ease-out border-b border-white/10 bg-[#0a0a0a]/95 backdrop-blur-xl px-6 py-6 space-y-4">
-      <nav class="flex flex-col space-y-3 font-sans text-base">
-        <a href="#hero" class="text-white hover:text-emerald-400 py-2 border-b border-white/5">Início</a>
-        <a href="#projetos" class="text-neutral-300 hover:text-emerald-400 py-2 border-b border-white/5">Projetos</a>
-        <a href="#sobre" class="text-neutral-300 hover:text-emerald-400 py-2 border-b border-white/5">Sobre</a>
-        <a href="#habilidades" class="text-neutral-300 hover:text-emerald-400 py-2 border-b border-white/5">Habilidades</a>
-        <a href="#contato" class="text-neutral-300 hover:text-emerald-400 py-2">Contato</a>
+    <!-- Menu Dropdown Mobile com Transição Fluida e Backdrop -->
+    <div id="mobile-menu" class="md:hidden opacity-0 pointer-events-none -translate-y-3 transition-all duration-300 ease-in-out border-b border-white/10 bg-[#0a0a0a]/95 backdrop-blur-2xl px-5 py-6 space-y-4 shadow-2xl max-h-[calc(100vh-80px)] overflow-y-auto">
+      <nav class="flex flex-col space-y-2 font-sans text-base">
+        <a href="#hero" class="text-white hover:text-emerald-400 py-2.5 border-b border-white/5 flex items-center justify-between">
+          <span>Início</span>
+          <span class="text-xs font-mono text-emerald-400">01</span>
+        </a>
+        <a href="#projetos" class="text-neutral-300 hover:text-emerald-400 py-2.5 border-b border-white/5 flex items-center justify-between">
+          <span>Projetos</span>
+          <span class="text-xs font-mono text-emerald-400">02</span>
+        </a>
+        <a href="#sobre" class="text-neutral-300 hover:text-emerald-400 py-2.5 border-b border-white/5 flex items-center justify-between">
+          <span>Sobre</span>
+          <span class="text-xs font-mono text-emerald-400">03</span>
+        </a>
+        <a href="#habilidades" class="text-neutral-300 hover:text-emerald-400 py-2.5 border-b border-white/5 flex items-center justify-between">
+          <span>Habilidades</span>
+          <span class="text-xs font-mono text-emerald-400">04</span>
+        </a>
+        <a href="#contato" class="text-neutral-300 hover:text-emerald-400 py-2.5 flex items-center justify-between">
+          <span>Contato</span>
+          <span class="text-xs font-mono text-emerald-400">05</span>
+        </a>
       </nav>
-      <div class="pt-4">
-        <a href="#contato" class="w-full inline-flex justify-center items-center px-5 py-3 rounded-full bg-emerald-500 text-black font-semibold text-sm">
-          Iniciar Conversa
+      <div class="pt-2 flex flex-col gap-2.5">
+        <a href="https://wa.me/5538998070033?text=Ol%C3%A1%20Wandry,%20vim%20pelo%20seu%20portf%C3%B3lio!" target="_blank" rel="noopener noreferrer" class="w-full inline-flex justify-center items-center gap-2 px-5 py-3 rounded-full bg-emerald-500 text-black font-semibold text-sm hover:bg-emerald-400 transition-colors">
+          <span>WhatsApp Direto</span>
+        </a>
+        <a href="#contato" class="w-full inline-flex justify-center items-center px-5 py-3 rounded-full border border-white/15 bg-white/5 text-white font-medium text-sm hover:border-emerald-500/40 transition-colors">
+          <span>Ver Canais de Contato</span>
         </a>
       </div>
     </div>
@@ -119,73 +140,73 @@
     <!-- =========================================================================
          2. SEÇÃO HERO (LAYOUT TIPOGRÁFICO EDITORIAL IMPACTANTE)
          ========================================================================= -->
-    <section id="hero" class="relative min-h-[92vh] pt-36 pb-20 md:pt-44 md:pb-28 flex items-center">
-      <div class="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 w-full">
+    <section id="hero" class="relative min-h-[90vh] pt-32 pb-16 sm:pt-36 sm:pb-20 md:pt-44 md:pb-28 flex items-center overflow-hidden">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12 w-full">
         
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center">
           
           <!-- Coluna Principal: Tipografia & Ações -->
-          <div class="lg:col-span-7 space-y-8">
+          <div class="lg:col-span-7 space-y-6 sm:space-y-8">
             
             <!-- Badge de Status Editorial -->
-            <div class="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full border border-emerald-500/25 bg-emerald-950/20 backdrop-blur-sm">
-              <span class="relative flex h-2 w-2">
+            <div class="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full border border-emerald-500/25 bg-emerald-950/20 backdrop-blur-sm max-w-full">
+              <span class="relative flex h-2 w-2 flex-shrink-0">
                 <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
                 <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
               </span>
-              <span class="font-mono text-xs uppercase tracking-widest text-emerald-400 font-medium">
+              <span class="font-mono text-[11px] sm:text-xs uppercase tracking-widest text-emerald-400 font-medium truncate">
                 Disponível para novos projetos
               </span>
             </div>
 
             <!-- Bloco de Títulos: "Olá! Eu sou o Wandry" e "Desenvolvedor WEB" -->
-            <div class="space-y-3">
-              <h1 class="font-serif text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-normal tracking-tight text-white leading-[1.08]">
+            <div class="space-y-2 sm:space-y-3">
+              <h1 class="font-serif text-3xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-normal tracking-tight text-white leading-[1.12] break-words">
                 Olá! Eu sou o <br class="hidden sm:inline">
                 <span class="italic font-light text-neutral-100 hover:text-emerald-400 transition-colors duration-300">Wandry</span>
               </h1>
 
-              <div class="flex items-center gap-4 pt-1">
-                <div class="h-[1px] w-12 sm:w-20 bg-emerald-500/60 hidden sm:block"></div>
-                <h2 class="font-serif text-3xl sm:text-5xl md:text-6xl font-light tracking-wide text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 via-emerald-300 to-teal-200">
+              <div class="flex items-center gap-3 sm:gap-4 pt-1">
+                <div class="h-[1px] w-8 sm:w-16 md:w-20 bg-emerald-500/60 hidden sm:block"></div>
+                <h2 class="font-serif text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-light tracking-wide text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 via-emerald-300 to-teal-200 break-words">
                   Desenvolvedor WEB
                 </h2>
               </div>
             </div>
 
             <!-- Subtítulo Editorial -->
-            <p class="font-sans text-neutral-300 text-lg sm:text-xl font-light max-w-2xl leading-relaxed">
+            <p class="font-sans text-neutral-300 text-sm sm:text-base md:text-lg lg:text-xl font-light max-w-2xl leading-relaxed">
               Desenvolvedor Web com foco em construir aplicações completas, unindo interfaces fluidas em 
               <span class="text-white font-normal">HTML, CSS e JavaScript</span> à solidez no backend com 
               <span class="text-emerald-400 font-normal">PHP e Python</span>. Foco constante em código limpo e alta performance.
             </p>
 
             <!-- Metadados Editoriais Rápidos -->
-            <div class="flex flex-wrap items-center gap-6 sm:gap-10 pt-2 font-mono text-xs text-neutral-400 border-t border-white/10 pt-6">
-              <div class="flex items-center gap-2">
+            <div class="grid grid-cols-3 gap-2 sm:gap-6 pt-4 font-mono text-[11px] sm:text-xs text-neutral-400 border-t border-white/10">
+              <div class="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2">
                 <span class="text-emerald-400 font-bold">01.</span>
                 <span class="uppercase tracking-wider">HTML & CSS</span>
               </div>
-              <div class="flex items-center gap-2">
+              <div class="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2">
                 <span class="text-emerald-400 font-bold">02.</span>
                 <span class="uppercase tracking-wider">JavaScript</span>
               </div>
-              <div class="flex items-center gap-2">
+              <div class="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2">
                 <span class="text-emerald-400 font-bold">03.</span>
                 <span class="uppercase tracking-wider">PHP & Python</span>
               </div>
             </div>
 
-            <!-- Botões de Ação Solicitados: "Ver Projetos" e "Contato" -->
-            <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 pt-4">
-              <a href="#projetos" class="btn-primary-green inline-flex items-center justify-center gap-3 px-8 py-4 rounded-full font-sans font-semibold text-sm tracking-wide group">
+            <!-- Botões de Ação: "Ver Projetos" e "Contato" -->
+            <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4 pt-2 sm:pt-4">
+              <a href="#projetos" class="btn-primary-green inline-flex items-center justify-center gap-3 px-6 py-3.5 sm:px-8 sm:py-4 rounded-full font-sans font-semibold text-sm tracking-wide group text-center">
                 <span>Ver Projetos</span>
                 <svg class="w-4 h-4 transition-transform duration-300 group-hover:translate-y-0.5 group-hover:translate-x-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"/>
                 </svg>
               </a>
 
-              <a href="#contato" class="btn-secondary-outline inline-flex items-center justify-center gap-3 px-8 py-4 rounded-full font-sans font-medium text-sm tracking-wide group">
+              <a href="#contato" class="btn-secondary-outline inline-flex items-center justify-center gap-3 px-6 py-3.5 sm:px-8 sm:py-4 rounded-full font-sans font-medium text-sm tracking-wide group text-center">
                 <span>Contato</span>
                 <svg class="w-4 h-4 text-emerald-400 transition-transform duration-300 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
@@ -194,33 +215,32 @@
             </div>
 
             <!-- Links Rápidos de Contato (WhatsApp, LinkedIn, GitHub) -->
-            <div class="flex flex-wrap items-center gap-3 pt-3">
-              <a href="https://wa.me/5538998070033?text=Ol%C3%A1%20Wandry,%20vim%20pelo%20seu%20portf%C3%B3lio!" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#141414] border border-white/10 hover:border-emerald-500/50 hover:bg-emerald-950/20 text-xs font-mono text-neutral-300 hover:text-emerald-400 transition-all duration-300" aria-label="Contato direto pelo WhatsApp">
-                <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-                <span>WhatsApp: (38) 99807-0033</span>
+            <div class="flex flex-wrap items-center gap-2 sm:gap-3 pt-2">
+              <a href="https://wa.me/5538998070033?text=Ol%C3%A1%20Wandry,%20vim%20pelo%20seu%20portf%C3%B3lio!" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#141414] border border-white/10 hover:border-emerald-500/50 hover:bg-emerald-950/20 text-[11px] sm:text-xs font-mono text-neutral-300 hover:text-emerald-400 transition-all duration-300 max-w-full" aria-label="Contato direto pelo WhatsApp">
+                <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse flex-shrink-0"></span>
+                <span class="truncate">WhatsApp: (38) 99807-0033</span>
               </a>
-              <a href="https://www.linkedin.com/in/wandry-nunes/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#141414] border border-white/10 hover:border-emerald-500/50 hover:bg-emerald-950/20 text-xs font-mono text-neutral-300 hover:text-emerald-400 transition-all duration-300" aria-label="Perfil no LinkedIn">
-                <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+              <a href="https://www.linkedin.com/in/wandry-nunes/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#141414] border border-white/10 hover:border-emerald-500/50 hover:bg-emerald-950/20 text-[11px] sm:text-xs font-mono text-neutral-300 hover:text-emerald-400 transition-all duration-300" aria-label="Perfil no LinkedIn">
+                <svg class="w-3.5 h-3.5 fill-current flex-shrink-0" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
                 <span>LinkedIn</span>
               </a>
-              <a href="https://github.com/Wandry03" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#141414] border border-white/10 hover:border-emerald-500/50 hover:bg-emerald-950/20 text-xs font-mono text-neutral-300 hover:text-emerald-400 transition-all duration-300" aria-label="Perfil no GitHub">
-                <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+              <a href="https://github.com/Wandry03" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#141414] border border-white/10 hover:border-emerald-500/50 hover:bg-emerald-950/20 text-[11px] sm:text-xs font-mono text-neutral-300 hover:text-emerald-400 transition-all duration-300" aria-label="Perfil no GitHub">
+                <svg class="w-3.5 h-3.5 fill-current flex-shrink-0" viewBox="0 0 24 24"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
                 <span>GitHub</span>
               </a>
             </div>
 
           </div>
 
-          <!-- Coluna Visual 3D Interativa: Torus Knot em Three.js -->
-          <!-- (Geometria abstrata verde metálico/vidro translúcido, interativa com cursor) -->
-          <div class="lg:col-span-5 relative mt-8 lg:mt-0">
-            <div class="relative mx-auto max-w-sm lg:max-w-none">
+          <!-- Coluna Visual 3D Interativa: Globo Terrestre em Three.js -->
+          <div class="lg:col-span-5 relative mt-8 lg:mt-0 w-full">
+            <div class="relative mx-auto max-w-sm sm:max-w-md lg:max-w-none w-full">
               
               <!-- Card Estrutural 3D com Glassmorphism Editorial -->
-              <div class="border-gradient-subtle bg-[#111111]/85 backdrop-blur-2xl rounded-2xl p-6 relative overflow-hidden group shadow-[0_20px_50px_rgba(0,0,0,0.6)]">
+              <div class="border-gradient-subtle bg-[#111111]/85 backdrop-blur-2xl rounded-2xl p-4 sm:p-6 relative overflow-hidden group shadow-[0_20px_50px_rgba(0,0,0,0.6)]">
                 
                 <!-- Barra Superior com Metadados & Status -->
-                <div class="flex items-center justify-between pb-4 border-b border-white/5">
+                <div class="flex items-center justify-between pb-3 sm:pb-4 border-b border-white/5">
                   <div class="flex items-center gap-2">
                     <span class="w-2.5 h-2.5 rounded-full bg-red-500/40"></span>
                     <span class="w-2.5 h-2.5 rounded-full bg-yellow-500/40"></span>
@@ -232,8 +252,8 @@
                   </div>
                 </div>
 
-                <!-- Container do Canvas Three.js -->
-                <div id="hero-canvas-container" class="relative w-full h-[350px] sm:h-[390px] md:h-[420px] flex items-center justify-center cursor-grab active:cursor-grabbing select-none">
+                <!-- Container do Canvas Three.js (Dimensões responsivas gerenciadas via CSS e JS) -->
+                <div id="hero-canvas-container" class="relative w-full flex items-center justify-center cursor-grab active:cursor-grabbing select-none">
                   <canvas id="hero-3d-canvas" class="w-full h-full block"></canvas>
                 </div>
 
@@ -242,17 +262,17 @@
 
               </div>
 
-              <!-- Cartão de Destaque Flutuante com Métricas -->
-              <div class="absolute -bottom-6 -left-4 sm:-left-6 bg-[#161616]/95 border border-white/10 rounded-xl p-4 backdrop-blur-md shadow-2xl flex items-center gap-3">
-                <div class="p-2.5 rounded-lg bg-emerald-500/10 text-emerald-400">
-                  <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <!-- Cartão de Destaque: Diamantina, MG (Fluido em Mobile, Flutuante em Desktop) -->
+              <div class="mt-3.5 sm:mt-0 sm:absolute sm:-bottom-5 sm:-left-3 md:-left-6 bg-[#161616]/95 border border-white/10 rounded-xl p-3 sm:p-4 backdrop-blur-md shadow-2xl flex items-center gap-2.5 sm:gap-3 w-full sm:w-auto sm:max-w-[calc(100%-1rem)]">
+                <div class="p-2 sm:p-2.5 rounded-lg bg-emerald-500/10 text-emerald-400 flex-shrink-0">
+                  <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
                   </svg>
                 </div>
                 <div>
-                  <div class="font-serif text-base font-bold text-white leading-none">Diamantina, MG</div>
-                  <div class="font-sans text-[11px] text-emerald-400 mt-1">Onde eu Moro</div>
+                  <div class="font-serif text-sm sm:text-base font-bold text-white leading-none">Diamantina, MG</div>
+                  <div class="font-sans text-[10px] sm:text-[11px] text-emerald-400 mt-1">Onde eu Moro</div>
                 </div>
               </div>
 
@@ -267,56 +287,56 @@
     <!-- =========================================================================
          3. SEÇÃO PROJETOS (GRID ASSIMÉTRICO MODERNO - LOGO ABAIXO DA HERO)
          ========================================================================= -->
-    <section id="projetos" class="py-28 border-t border-white/5 bg-[#0b0b0b]/60 relative">
-      <div class="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
+    <section id="projetos" class="py-16 sm:py-20 md:py-28 border-t border-white/5 bg-[#0b0b0b]/60 relative overflow-hidden">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12">
         
         <!-- Cabeçalho da Seção com Animação de Rolagem -->
-        <div class="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6 reveal-on-scroll">
+        <div class="flex flex-col md:flex-row md:items-end justify-between mb-10 sm:mb-14 md:mb-16 gap-4 sm:gap-6 reveal-on-scroll">
           <div>
             <span class="font-mono text-xs uppercase tracking-widest text-emerald-400 font-semibold block mb-2">
               ( 01 ) Projetos Selecionados
             </span>
-            <h2 class="font-serif text-3xl sm:text-5xl text-white font-normal leading-tight">
+            <h2 class="font-serif text-2xl sm:text-4xl md:text-5xl text-white font-normal leading-tight">
               Criações & Experiências Digitais
             </h2>
           </div>
         </div>
 
         <!-- Grade Assimétrica Moderna de Projetos (12 Colunas) -->
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 md:gap-8">
           
           <!-- Card 1: Destaque Amplo (8 Colunas) - Projeto Real: Texto para Áudio -->
-          <article class="lg:col-span-8 group project-card-asymmetric rounded-3xl overflow-hidden bg-[#111111]/90 backdrop-blur-xl p-6 sm:p-8 flex flex-col justify-between reveal-on-scroll">
+          <article class="lg:col-span-8 group project-card-asymmetric rounded-3xl overflow-hidden bg-[#111111]/90 backdrop-blur-xl p-5 sm:p-7 md:p-8 flex flex-col justify-between reveal-on-scroll">
             <div>
               <!-- Mockup / Preview Visual com Zoom Suave no Hover -->
-              <div class="overflow-hidden rounded-2xl bg-[#080808] border border-white/5 relative mb-6">
+              <div class="overflow-hidden rounded-2xl bg-[#080808] border border-white/5 relative mb-5 sm:mb-6">
                 <!-- Barra de Terminal Fictícia -->
-                <div class="flex items-center justify-between px-4 py-3 border-b border-white/5 bg-white/[0.02]">
+                <div class="flex items-center justify-between px-3 sm:px-4 py-2.5 sm:py-3 border-b border-white/5 bg-white/[0.02]">
                   <div class="flex items-center gap-1.5">
                     <span class="w-2.5 h-2.5 rounded-full bg-red-500/50"></span>
                     <span class="w-2.5 h-2.5 rounded-full bg-yellow-500/50"></span>
                     <span class="w-2.5 h-2.5 rounded-full bg-emerald-500/80"></span>
                   </div>
-                  <span class="font-mono text-[11px] text-neutral-500">github.com/Wandry03/Texto-para-audio</span>
-                  <div class="w-8"></div>
+                  <span class="font-mono text-[10px] sm:text-[11px] text-neutral-500 truncate max-w-[200px] sm:max-w-none">github.com/Wandry03/Texto-para-audio</span>
+                  <div class="w-4 sm:w-8"></div>
                 </div>
 
                 <!-- Preview Visual: Interface Terminal do Conversor TTS -->
-                <div class="h-60 sm:h-72 p-6 flex items-center justify-center relative overflow-hidden group-hover:scale-[1.03] transition-transform duration-700 ease-out bg-gradient-to-br from-[#0a0f0c] to-[#090909]">
+                <div class="h-52 sm:h-64 md:h-72 p-4 sm:p-6 flex items-center justify-center relative overflow-hidden group-hover:scale-[1.03] transition-transform duration-700 ease-out bg-gradient-to-br from-[#0a0f0c] to-[#090909]">
                   <div class="absolute inset-0 bg-gradient-to-t from-emerald-900/10 via-transparent to-transparent pointer-events-none"></div>
 
                   <!-- Layout tipo terminal com ondas de áudio -->
                   <div class="w-full max-w-sm space-y-3 z-10">
                     <!-- Linha de input -->
-                    <div class="flex items-center gap-3 px-4 py-3 rounded-xl bg-[#111]/80 border border-white/8">
+                    <div class="flex items-center gap-2.5 sm:gap-3 px-3 sm:px-4 py-2.5 sm:py-3 rounded-xl bg-[#111]/80 border border-white/8">
                       <svg class="w-4 h-4 text-emerald-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
                       </svg>
-                      <span class="font-mono text-xs text-neutral-300 truncate">"Olá, este é um exemplo de texto para áudio..."</span>
+                      <span class="font-mono text-[11px] sm:text-xs text-neutral-300 truncate">"Olá, este é um exemplo de texto para áudio..."</span>
                     </div>
 
                     <!-- Onda de áudio animada -->
-                    <div class="flex items-center justify-center gap-1 py-4">
+                    <div class="flex items-center justify-center gap-1 py-3 sm:py-4">
                       <div class="w-1 bg-emerald-500 rounded-full animate-[wave_1.2s_ease-in-out_infinite]" style="height:8px;animation-delay:0s"></div>
                       <div class="w-1 bg-emerald-400 rounded-full animate-[wave_1.2s_ease-in-out_infinite]" style="height:20px;animation-delay:0.1s"></div>
                       <div class="w-1 bg-emerald-500 rounded-full animate-[wave_1.2s_ease-in-out_infinite]" style="height:32px;animation-delay:0.2s"></div>
@@ -338,37 +358,37 @@
                     <div class="flex items-center justify-between px-3 py-2 rounded-lg bg-emerald-500/10 border border-emerald-500/20">
                       <div class="flex items-center gap-2">
                         <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-                        <span class="font-mono text-[11px] text-emerald-300">Convertendo para .mp3</span>
+                        <span class="font-mono text-[10px] sm:text-[11px] text-emerald-300">Convertendo para .mp3</span>
                       </div>
-                      <span class="font-mono text-[11px] text-neutral-400">gTTS / Python</span>
+                      <span class="font-mono text-[10px] sm:text-[11px] text-neutral-400">gTTS / Python</span>
                     </div>
                   </div>
                 </div>
               </div>
 
               <!-- Informações do Projeto -->
-              <div class="space-y-3">
+              <div class="space-y-2.5 sm:space-y-3">
                 <div class="flex items-center justify-between text-xs font-mono text-neutral-400">
                   <span class="text-emerald-400 font-semibold tracking-wider">01 / PYTHON &amp; AUTOMAÇÃO</span>
                   <span>2026</span>
                 </div>
-                <h3 class="font-serif text-2xl sm:text-3xl text-white group-hover:text-emerald-400 transition-colors">
+                <h3 class="font-serif text-xl sm:text-2xl md:text-3xl text-white group-hover:text-emerald-400 transition-colors">
                   Texto para Áudio • Conversor TTS em Python
                 </h3>
-                <p class="text-neutral-400 text-sm sm:text-base font-light leading-relaxed">
+                <p class="text-neutral-400 text-xs sm:text-sm md:text-base font-light leading-relaxed">
                   Programa em Python que converte qualquer texto em áudio de forma simples e eficiente. Utiliza a biblioteca gTTS (Google Text-to-Speech) para gerar arquivos de áudio .mp3 a partir de strings de texto, com suporte a múltiplos idiomas.
                 </p>
               </div>
             </div>
 
             <!-- Tags de Tecnologias (Aparição e Realce Suave) -->
-            <div class="pt-6 mt-6 border-t border-white/5 flex flex-wrap items-center justify-between gap-4">
-              <div class="flex flex-wrap items-center gap-2">
-                <span class="tech-tag-badge px-3 py-1 rounded-full text-xs font-mono bg-white/5 border border-white/10 text-neutral-300">Python</span>
-                <span class="tech-tag-badge px-3 py-1 rounded-full text-xs font-mono bg-white/5 border border-white/10 text-neutral-300">gTTS</span>
-                <span class="tech-tag-badge px-3 py-1 rounded-full text-xs font-mono bg-white/5 border border-white/10 text-neutral-300">Text-to-Speech</span>
-                <span class="tech-tag-badge px-3 py-1 rounded-full text-xs font-mono bg-white/5 border border-white/10 text-neutral-300">Automação</span>
-                <span class="tech-tag-badge px-3 py-1 rounded-full text-xs font-mono bg-white/5 border border-white/10 text-neutral-300">CLI</span>
+            <div class="pt-5 sm:pt-6 mt-5 sm:mt-6 border-t border-white/5 flex flex-wrap items-center justify-between gap-3 sm:gap-4">
+              <div class="flex flex-wrap items-center gap-1.5 sm:gap-2">
+                <span class="tech-tag-badge px-2.5 py-1 sm:px-3 sm:py-1 rounded-full text-[11px] sm:text-xs font-mono bg-white/5 border border-white/10 text-neutral-300">Python</span>
+                <span class="tech-tag-badge px-2.5 py-1 sm:px-3 sm:py-1 rounded-full text-[11px] sm:text-xs font-mono bg-white/5 border border-white/10 text-neutral-300">gTTS</span>
+                <span class="tech-tag-badge px-2.5 py-1 sm:px-3 sm:py-1 rounded-full text-[11px] sm:text-xs font-mono bg-white/5 border border-white/10 text-neutral-300">Text-to-Speech</span>
+                <span class="tech-tag-badge px-2.5 py-1 sm:px-3 sm:py-1 rounded-full text-[11px] sm:text-xs font-mono bg-white/5 border border-white/10 text-neutral-300">Automação</span>
+                <span class="tech-tag-badge px-2.5 py-1 sm:px-3 sm:py-1 rounded-full text-[11px] sm:text-xs font-mono bg-white/5 border border-white/10 text-neutral-300">CLI</span>
               </div>
               <a href="https://github.com/Wandry03/Texto-para-audio" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 font-mono text-xs text-emerald-400 group-hover:translate-x-1 transition-transform">
                 <span>Ver no GitHub</span>
@@ -378,11 +398,11 @@
           </article>
 
           <!-- Card 2: Destaque Vertical (4 Colunas) -->
-          <article class="lg:col-span-4 group project-card-asymmetric rounded-3xl overflow-hidden bg-[#111111]/90 backdrop-blur-xl p-6 sm:p-8 flex flex-col justify-between reveal-on-scroll delay-150">
+          <article class="lg:col-span-4 group project-card-asymmetric rounded-3xl overflow-hidden bg-[#111111]/90 backdrop-blur-xl p-5 sm:p-7 md:p-8 flex flex-col justify-between reveal-on-scroll delay-150">
             <div>
               <!-- Mockup Terminal CLI -->
-              <div class="overflow-hidden rounded-2xl bg-[#080808] border border-white/5 relative mb-6">
-                <div class="flex items-center justify-between px-4 py-3 border-b border-white/5 bg-white/[0.02]">
+              <div class="overflow-hidden rounded-2xl bg-[#080808] border border-white/5 relative mb-5 sm:mb-6">
+                <div class="flex items-center justify-between px-3 sm:px-4 py-2.5 sm:py-3 border-b border-white/5 bg-white/[0.02]">
                   <div class="flex items-center gap-1.5">
                     <span class="w-2.5 h-2.5 rounded-full bg-emerald-500/70"></span>
                     <span class="w-2.5 h-2.5 rounded-full bg-white/20"></span>
@@ -390,7 +410,7 @@
                   </div>
                   <span class="font-mono text-[10px] text-neutral-500 uppercase tracking-widest">STREAM_ENGINE.PY</span>
                 </div>
-                <div class="h-60 sm:h-72 p-5 font-mono text-[11px] text-neutral-400 space-y-2 flex flex-col justify-center overflow-hidden group-hover:scale-[1.03] transition-transform duration-700 ease-out bg-black/40">
+                <div class="h-52 sm:h-64 md:h-72 p-4 sm:p-5 font-mono text-[10px] sm:text-[11px] text-neutral-400 space-y-2 flex flex-col justify-center overflow-hidden group-hover:scale-[1.03] transition-transform duration-700 ease-out bg-black/40">
                   <div class="text-neutral-500">$ python -m engine --live</div>
                   <div class="text-emerald-400">[INFO] Hub Diamantina conectado</div>
                   <div class="text-neutral-300">[POLL] 5,878 pontos sincronizados</div>
@@ -403,26 +423,26 @@
               </div>
 
               <!-- Informações do Projeto -->
-              <div class="space-y-3">
+              <div class="space-y-2.5 sm:space-y-3">
                 <div class="flex items-center justify-between text-xs font-mono text-neutral-400">
                   <span class="text-emerald-400 font-semibold tracking-wider">02 / BACKEND & DADOS</span>
                   <span>2026</span>
                 </div>
-                <h3 class="font-serif text-2xl text-white group-hover:text-emerald-400 transition-colors">
+                <h3 class="font-serif text-xl sm:text-2xl text-white group-hover:text-emerald-400 transition-colors">
                   DataStream • Engine Python & Automação
                 </h3>
-                <p class="text-neutral-400 text-sm font-light leading-relaxed">
+                <p class="text-neutral-400 text-xs sm:text-sm font-light leading-relaxed">
                   Automação assíncrona para extração, tratamento e estruturação de dados em tempo real, integrando rotinas em Python com APIs REST estáveis.
                 </p>
               </div>
             </div>
 
             <!-- Tags -->
-            <div class="pt-6 mt-6 border-t border-white/5 flex flex-wrap items-center justify-between gap-3">
-              <div class="flex flex-wrap items-center gap-2">
-                <span class="tech-tag-badge px-3 py-1 rounded-full text-xs font-mono bg-white/5 border border-white/10 text-neutral-300">Python</span>
-                <span class="tech-tag-badge px-3 py-1 rounded-full text-xs font-mono bg-white/5 border border-white/10 text-neutral-300">AsyncIO</span>
-                <span class="tech-tag-badge px-3 py-1 rounded-full text-xs font-mono bg-white/5 border border-white/10 text-neutral-300">REST APIs</span>
+            <div class="pt-5 sm:pt-6 mt-5 sm:mt-6 border-t border-white/5 flex flex-wrap items-center justify-between gap-3">
+              <div class="flex flex-wrap items-center gap-1.5 sm:gap-2">
+                <span class="tech-tag-badge px-2.5 py-1 sm:px-3 sm:py-1 rounded-full text-[11px] sm:text-xs font-mono bg-white/5 border border-white/10 text-neutral-300">Python</span>
+                <span class="tech-tag-badge px-2.5 py-1 sm:px-3 sm:py-1 rounded-full text-[11px] sm:text-xs font-mono bg-white/5 border border-white/10 text-neutral-300">AsyncIO</span>
+                <span class="tech-tag-badge px-2.5 py-1 sm:px-3 sm:py-1 rounded-full text-[11px] sm:text-xs font-mono bg-white/5 border border-white/10 text-neutral-300">REST APIs</span>
               </div>
               <span class="inline-flex items-center gap-1.5 font-mono text-xs text-emerald-400 group-hover:translate-x-1 transition-transform">
                 <span>Ver Docs</span>
@@ -432,11 +452,11 @@
           </article>
 
           <!-- Card 3: Médio Assimétrico (5 Colunas) -->
-          <article class="lg:col-span-5 group project-card-asymmetric rounded-3xl overflow-hidden bg-[#111111]/90 backdrop-blur-xl p-6 sm:p-8 flex flex-col justify-between reveal-on-scroll delay-100">
+          <article class="lg:col-span-5 group project-card-asymmetric rounded-3xl overflow-hidden bg-[#111111]/90 backdrop-blur-xl p-5 sm:p-7 md:p-8 flex flex-col justify-between reveal-on-scroll delay-100">
             <div>
               <!-- Mockup Editorial CMS -->
-              <div class="overflow-hidden rounded-2xl bg-[#080808] border border-white/5 relative mb-6">
-                <div class="flex items-center justify-between px-4 py-3 border-b border-white/5 bg-white/[0.02]">
+              <div class="overflow-hidden rounded-2xl bg-[#080808] border border-white/5 relative mb-5 sm:mb-6">
+                <div class="flex items-center justify-between px-3 sm:px-4 py-2.5 sm:py-3 border-b border-white/5 bg-white/[0.02]">
                   <div class="flex items-center gap-1.5">
                     <span class="w-2.5 h-2.5 rounded-full bg-white/20"></span>
                     <span class="w-2.5 h-2.5 rounded-full bg-white/20"></span>
@@ -444,12 +464,12 @@
                   </div>
                   <span class="font-mono text-[10px] text-neutral-500">CHRONICLE / CMS</span>
                 </div>
-                <div class="h-48 p-6 flex flex-col justify-center space-y-3 overflow-hidden group-hover:scale-[1.03] transition-transform duration-700 ease-out bg-gradient-to-br from-[#121212] to-[#0a0a0a]">
-                  <div class="w-16 h-1 bg-emerald-500 rounded-full"></div>
-                  <div class="font-serif text-lg text-white font-normal italic">
+                <div class="h-44 sm:h-48 md:h-52 p-4 sm:p-6 flex flex-col justify-center space-y-2.5 sm:space-y-3 overflow-hidden group-hover:scale-[1.03] transition-transform duration-700 ease-out bg-gradient-to-br from-[#121212] to-[#0a0a0a]">
+                  <div class="w-12 sm:w-16 h-1 bg-emerald-500 rounded-full"></div>
+                  <div class="font-serif text-base sm:text-lg text-white font-normal italic">
                     "Tipografia e arquitetura editorial em harmonia."
                   </div>
-                  <div class="flex items-center gap-3 pt-2 text-[10px] font-mono text-neutral-400">
+                  <div class="flex items-center gap-2 sm:gap-3 pt-1 sm:pt-2 text-[10px] font-mono text-neutral-400">
                     <span>POSTGRESQL / MYSQL</span>
                     <span>•</span>
                     <span class="text-emerald-400">API INTEGRADA</span>
@@ -458,27 +478,27 @@
               </div>
 
               <!-- Informações -->
-              <div class="space-y-3">
+              <div class="space-y-2.5 sm:space-y-3">
                 <div class="flex items-center justify-between text-xs font-mono text-neutral-400">
                   <span class="text-emerald-400 font-semibold tracking-wider">03 / FULL STACK</span>
                   <span>2026</span>
                 </div>
-                <h3 class="font-serif text-2xl text-white group-hover:text-emerald-400 transition-colors">
+                <h3 class="font-serif text-xl sm:text-2xl text-white group-hover:text-emerald-400 transition-colors">
                   Chronicle • Plataforma Editorial & CMS
                 </h3>
-                <p class="text-neutral-400 text-sm font-light leading-relaxed">
+                <p class="text-neutral-400 text-xs sm:text-sm font-light leading-relaxed">
                   Sistema de publicação digital com backend robusto em PHP, banco de dados estruturado e renderização instantânea com foco em legibilidade imersiva.
                 </p>
               </div>
             </div>
 
             <!-- Tags -->
-            <div class="pt-6 mt-6 border-t border-white/5 flex flex-wrap items-center justify-between gap-3">
-              <div class="flex flex-wrap items-center gap-2">
-                <span class="tech-tag-badge px-3 py-1 rounded-full text-xs font-mono bg-white/5 border border-white/10 text-neutral-300">PHP</span>
-                <span class="tech-tag-badge px-3 py-1 rounded-full text-xs font-mono bg-white/5 border border-white/10 text-neutral-300">MySQL</span>
-                <span class="tech-tag-badge px-3 py-1 rounded-full text-xs font-mono bg-white/5 border border-white/10 text-neutral-300">JavaScript</span>
-                <span class="tech-tag-badge px-3 py-1 rounded-full text-xs font-mono bg-white/5 border border-white/10 text-neutral-300">CSS Grid</span>
+            <div class="pt-5 sm:pt-6 mt-5 sm:mt-6 border-t border-white/5 flex flex-wrap items-center justify-between gap-3">
+              <div class="flex flex-wrap items-center gap-1.5 sm:gap-2">
+                <span class="tech-tag-badge px-2.5 py-1 sm:px-3 sm:py-1 rounded-full text-[11px] sm:text-xs font-mono bg-white/5 border border-white/10 text-neutral-300">PHP</span>
+                <span class="tech-tag-badge px-2.5 py-1 sm:px-3 sm:py-1 rounded-full text-[11px] sm:text-xs font-mono bg-white/5 border border-white/10 text-neutral-300">MySQL</span>
+                <span class="tech-tag-badge px-2.5 py-1 sm:px-3 sm:py-1 rounded-full text-[11px] sm:text-xs font-mono bg-white/5 border border-white/10 text-neutral-300">JavaScript</span>
+                <span class="tech-tag-badge px-2.5 py-1 sm:px-3 sm:py-1 rounded-full text-[11px] sm:text-xs font-mono bg-white/5 border border-white/10 text-neutral-300">CSS Grid</span>
               </div>
               <span class="inline-flex items-center gap-1.5 font-mono text-xs text-emerald-400 group-hover:translate-x-1 transition-transform">
                 <span>Ver Projeto</span>
@@ -488,61 +508,61 @@
           </article>
 
           <!-- Card 4: Amplo Assimétrico (7 Colunas) -->
-          <article class="lg:col-span-7 group project-card-asymmetric rounded-3xl overflow-hidden bg-[#111111]/90 backdrop-blur-xl p-6 sm:p-8 flex flex-col justify-between reveal-on-scroll delay-200">
+          <article class="lg:col-span-7 group project-card-asymmetric rounded-3xl overflow-hidden bg-[#111111]/90 backdrop-blur-xl p-5 sm:p-7 md:p-8 flex flex-col justify-between reveal-on-scroll delay-200">
             <div>
               <!-- Mockup Design System & Componentes -->
-              <div class="overflow-hidden rounded-2xl bg-[#080808] border border-white/5 relative mb-6">
-                <div class="flex items-center justify-between px-4 py-3 border-b border-white/5 bg-white/[0.02]">
+              <div class="overflow-hidden rounded-2xl bg-[#080808] border border-white/5 relative mb-5 sm:mb-6">
+                <div class="flex items-center justify-between px-3 sm:px-4 py-2.5 sm:py-3 border-b border-white/5 bg-white/[0.02]">
                   <div class="flex items-center gap-1.5">
                     <span class="w-2.5 h-2.5 rounded-full bg-white/20"></span>
                     <span class="w-2.5 h-2.5 rounded-full bg-white/20"></span>
                     <span class="w-2.5 h-2.5 rounded-full bg-white/20"></span>
                   </div>
                   <span class="font-mono text-[10px] text-neutral-500 uppercase tracking-widest">DESIGN SYSTEM CORE UI</span>
-                  <div class="w-8"></div>
+                  <div class="w-4 sm:w-8"></div>
                 </div>
-                <div class="h-48 p-6 flex items-center justify-around overflow-hidden group-hover:scale-[1.03] transition-transform duration-700 ease-out bg-[#0e0e0e]">
+                <div class="min-h-[10rem] p-3 sm:p-6 flex flex-wrap sm:flex-nowrap items-center justify-around gap-2.5 overflow-hidden group-hover:scale-[1.03] transition-transform duration-700 ease-out bg-[#0e0e0e]">
                   <!-- Mini Componente 1: Toggle Switch -->
-                  <div class="p-3.5 rounded-xl bg-[#141414] border border-white/10 flex items-center gap-3">
-                    <span class="font-mono text-[11px] text-neutral-400">Dark Mode</span>
-                    <div class="w-9 h-5 rounded-full bg-emerald-500 p-0.5 flex justify-end">
-                      <div class="w-4 h-4 rounded-full bg-black"></div>
+                  <div class="p-2.5 sm:p-3.5 rounded-xl bg-[#141414] border border-white/10 flex items-center gap-2 sm:gap-3">
+                    <span class="font-mono text-[10px] sm:text-[11px] text-neutral-400">Dark Mode</span>
+                    <div class="w-8 sm:w-9 h-4.5 sm:h-5 rounded-full bg-emerald-500 p-0.5 flex justify-end">
+                      <div class="w-3.5 sm:w-4 h-3.5 sm:h-4 rounded-full bg-black"></div>
                     </div>
                   </div>
                   <!-- Mini Componente 2: Pill Status -->
-                  <div class="p-3.5 rounded-xl bg-[#141414] border border-white/10 flex items-center gap-2">
+                  <div class="p-2.5 sm:p-3.5 rounded-xl bg-[#141414] border border-white/10 flex items-center gap-2">
                     <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-                    <span class="font-mono text-[11px] text-emerald-300">100% A11y Accessible</span>
+                    <span class="font-mono text-[10px] sm:text-[11px] text-emerald-300">100% A11y Accessible</span>
                   </div>
                   <!-- Mini Componente 3: Button Microinteraction -->
-                  <div class="hidden sm:flex px-4 py-2 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 font-mono text-xs">
+                  <div class="hidden xs:flex px-3 sm:px-4 py-1.5 sm:py-2 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 font-mono text-xs">
                     React + Tailwind
                   </div>
                 </div>
               </div>
 
               <!-- Informações -->
-              <div class="space-y-3">
+              <div class="space-y-2.5 sm:space-y-3">
                 <div class="flex items-center justify-between text-xs font-mono text-neutral-400">
                   <span class="text-emerald-400 font-semibold tracking-wider">04 / DESIGN SYSTEM & UI</span>
                   <span>2026</span>
                 </div>
-                <h3 class="font-serif text-2xl sm:text-3xl text-white group-hover:text-emerald-400 transition-colors">
+                <h3 class="font-serif text-xl sm:text-2xl md:text-3xl text-white group-hover:text-emerald-400 transition-colors">
                   Core UI • Componentes Modulares & Acessíveis
                 </h3>
-                <p class="text-neutral-400 text-sm font-light leading-relaxed">
+                <p class="text-neutral-400 text-xs sm:text-sm font-light leading-relaxed">
                   Coleção modular de componentes reutilizáveis inspirados em arquiteturas React e Tailwind CSS, orientados a semântica rigorosa, conformidade a11y e microinterações táteis.
                 </p>
               </div>
             </div>
 
             <!-- Tags -->
-            <div class="pt-6 mt-6 border-t border-white/5 flex flex-wrap items-center justify-between gap-3">
-              <div class="flex flex-wrap items-center gap-2">
-                <span class="tech-tag-badge px-3 py-1 rounded-full text-xs font-mono bg-white/5 border border-white/10 text-neutral-300">React</span>
-                <span class="tech-tag-badge px-3 py-1 rounded-full text-xs font-mono bg-white/5 border border-white/10 text-neutral-300">Tailwind CSS</span>
-                <span class="tech-tag-badge px-3 py-1 rounded-full text-xs font-mono bg-white/5 border border-white/10 text-neutral-300">HTML5 Semântico</span>
-                <span class="tech-tag-badge px-3 py-1 rounded-full text-xs font-mono bg-white/5 border border-white/10 text-neutral-300">A11y</span>
+            <div class="pt-5 sm:pt-6 mt-5 sm:mt-6 border-t border-white/5 flex flex-wrap items-center justify-between gap-3">
+              <div class="flex flex-wrap items-center gap-1.5 sm:gap-2">
+                <span class="tech-tag-badge px-2.5 py-1 sm:px-3 sm:py-1 rounded-full text-[11px] sm:text-xs font-mono bg-white/5 border border-white/10 text-neutral-300">React</span>
+                <span class="tech-tag-badge px-2.5 py-1 sm:px-3 sm:py-1 rounded-full text-[11px] sm:text-xs font-mono bg-white/5 border border-white/10 text-neutral-300">Tailwind CSS</span>
+                <span class="tech-tag-badge px-2.5 py-1 sm:px-3 sm:py-1 rounded-full text-[11px] sm:text-xs font-mono bg-white/5 border border-white/10 text-neutral-300">HTML5 Semântico</span>
+                <span class="tech-tag-badge px-2.5 py-1 sm:px-3 sm:py-1 rounded-full text-[11px] sm:text-xs font-mono bg-white/5 border border-white/10 text-neutral-300">A11y</span>
               </div>
               <span class="inline-flex items-center gap-1.5 font-mono text-xs text-emerald-400 group-hover:translate-x-1 transition-transform">
                 <span>Explorar UI</span>
@@ -559,20 +579,20 @@
     <!-- =========================================================================
          4. SEÇÃO SOBRE (MANIFESTO EDITORIAL)
          ========================================================================= -->
-    <section id="sobre" class="py-24 border-t border-white/5 relative">
-      <div class="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+    <section id="sobre" class="py-16 sm:py-20 md:py-24 border-t border-white/5 relative overflow-hidden">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
           
           <div class="lg:col-span-4 reveal-on-scroll">
             <span class="font-mono text-xs uppercase tracking-widest text-emerald-400 font-semibold block mb-2">
               ( 02 ) Sobre
             </span>
-            <h2 class="font-serif text-3xl sm:text-4xl text-white font-normal leading-tight">
+            <h2 class="font-serif text-2xl sm:text-3xl md:text-4xl text-white font-normal leading-snug">
               Design limpo, tipografia expressiva e código meticuloso.
             </h2>
           </div>
 
-          <div class="lg:col-span-8 space-y-6 text-neutral-300 font-light text-base sm:text-lg leading-relaxed reveal-on-scroll delay-100">
+          <div class="lg:col-span-8 space-y-5 sm:space-y-6 text-neutral-300 font-light text-sm sm:text-base md:text-lg leading-relaxed reveal-on-scroll delay-100">
             <p>
               Sou um Desenvolvedor Web focado em criar soluções completas e funcionais. Minha atuação combina a construção de interfaces intuitivas e responsivas com 
               <span class="text-white font-normal">HTML, CSS e JavaScript</span> ao desenvolvimento de regras de negócio consistentes no backend com 
@@ -582,7 +602,7 @@
               Acredito em código limpo, boa semântica e facilidade de manutenção. Cada projeto é elaborado com atenção aos detalhes estruturais e respeito à experiência de navegação do usuário.
             </p>
             
-            <div class="grid grid-cols-2 sm:grid-cols-3 gap-6 pt-6 border-t border-white/10 font-mono text-xs">
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 pt-6 border-t border-white/10 font-mono text-xs">
               <div>
                 <span class="text-neutral-400 block mb-1">LOCALIZAÇÃO</span>
                 <span class="text-white font-medium">Diamantina - MG (Remoto)</span>
@@ -605,51 +625,51 @@
     <!-- =========================================================================
          5. SEÇÃO HABILIDADES / STACK
          ========================================================================= -->
-    <section id="habilidades" class="py-24 border-t border-white/5 relative">
-      <div class="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
+    <section id="habilidades" class="py-16 sm:py-20 md:py-24 border-t border-white/5 relative overflow-hidden">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12">
         
-        <div class="mb-14">
+        <div class="mb-10 sm:mb-14">
           <span class="font-mono text-xs uppercase tracking-widest text-emerald-400 font-semibold block mb-2">
             ( 03 ) Competências
           </span>
-          <h2 class="font-serif text-3xl sm:text-4xl text-white font-normal">
+          <h2 class="font-serif text-2xl sm:text-3xl md:text-4xl text-white font-normal">
             Tecnologias & Habilidades
           </h2>
         </div>
 
-        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
+        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3 sm:gap-4">
           
-          <div class="p-5 rounded-xl bg-[#121212] border border-white/5 hover:border-emerald-500/30 transition-all hover:-translate-y-1 text-center">
+          <div class="p-4 sm:p-5 rounded-xl bg-[#121212] border border-white/5 hover:border-emerald-500/30 transition-all hover:-translate-y-1 text-center">
             <span class="font-mono text-xs text-emerald-400 block mb-1">01</span>
             <span class="font-medium text-white text-sm block">HTML5</span>
             <span class="font-sans text-[11px] text-neutral-400 mt-1 block">Semântica & SEO</span>
           </div>
 
-          <div class="p-5 rounded-xl bg-[#121212] border border-white/5 hover:border-emerald-500/30 transition-all hover:-translate-y-1 text-center">
+          <div class="p-4 sm:p-5 rounded-xl bg-[#121212] border border-white/5 hover:border-emerald-500/30 transition-all hover:-translate-y-1 text-center">
             <span class="font-mono text-xs text-emerald-400 block mb-1">02</span>
             <span class="font-medium text-white text-sm block">CSS3</span>
-            <span class="font-sans text-[11px] text-neutral-400 mt-1 block">Flexbox, Grid & Design</span>
+            <span class="font-sans text-[11px] text-neutral-400 mt-1 block">Flexbox, Grid & UI</span>
           </div>
 
-          <div class="p-5 rounded-xl bg-[#121212] border border-white/5 hover:border-emerald-500/30 transition-all hover:-translate-y-1 text-center">
+          <div class="p-4 sm:p-5 rounded-xl bg-[#121212] border border-white/5 hover:border-emerald-500/30 transition-all hover:-translate-y-1 text-center">
             <span class="font-mono text-xs text-emerald-400 block mb-1">03</span>
             <span class="font-medium text-white text-sm block">JavaScript</span>
             <span class="font-sans text-[11px] text-neutral-400 mt-1 block">ES6+, DOM & APIs</span>
           </div>
 
-          <div class="p-5 rounded-xl bg-[#121212] border border-white/5 hover:border-emerald-500/30 transition-all hover:-translate-y-1 text-center">
+          <div class="p-4 sm:p-5 rounded-xl bg-[#121212] border border-white/5 hover:border-emerald-500/30 transition-all hover:-translate-y-1 text-center">
             <span class="font-mono text-xs text-emerald-400 block mb-1">04</span>
             <span class="font-medium text-white text-sm block">PHP</span>
             <span class="font-sans text-[11px] text-neutral-400 mt-1 block">Backend & Integrações</span>
           </div>
 
-          <div class="p-5 rounded-xl bg-[#121212] border border-white/5 hover:border-emerald-500/30 transition-all hover:-translate-y-1 text-center">
+          <div class="p-4 sm:p-5 rounded-xl bg-[#121212] border border-white/5 hover:border-emerald-500/30 transition-all hover:-translate-y-1 text-center">
             <span class="font-mono text-xs text-emerald-400 block mb-1">05</span>
             <span class="font-medium text-white text-sm block">Python</span>
             <span class="font-sans text-[11px] text-neutral-400 mt-1 block">Automação & Lógica</span>
           </div>
 
-          <div class="p-5 rounded-xl bg-[#121212] border border-white/5 hover:border-emerald-500/30 transition-all hover:-translate-y-1 text-center">
+          <div class="p-4 sm:p-5 rounded-xl bg-[#121212] border border-white/5 hover:border-emerald-500/30 transition-all hover:-translate-y-1 text-center">
             <span class="font-mono text-xs text-emerald-400 block mb-1">06</span>
             <span class="font-medium text-white text-sm block">Web Dev</span>
             <span class="font-sans text-[11px] text-neutral-400 mt-1 block">Responsivo & Fluido</span>
@@ -663,38 +683,38 @@
     <!-- =========================================================================
          6. SEÇÃO CONTATO (HUB EDITORIAL DE CONTATOS & CONEXÃO)
          ========================================================================= -->
-    <section id="contato" class="py-28 border-t border-white/5 bg-gradient-to-b from-[#0a0a0a] via-[#0d1410] to-[#070b09] relative overflow-hidden">
+    <section id="contato" class="py-16 sm:py-20 md:py-28 border-t border-white/5 bg-gradient-to-b from-[#0a0a0a] via-[#0d1410] to-[#070b09] relative overflow-hidden">
       <!-- Glow decorativo sutil de fundo -->
       <div class="absolute bottom-0 left-1/2 -translate-x-1/2 w-full max-w-4xl h-80 bg-emerald-500/10 blur-[130px] pointer-events-none rounded-full"></div>
 
-      <div class="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 relative z-10">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12 relative z-10">
         
         <!-- Cabeçalho Editorial -->
-        <div class="text-center max-w-3xl mx-auto mb-16 space-y-4 reveal-on-scroll">
+        <div class="text-center max-w-3xl mx-auto mb-10 sm:mb-14 md:mb-16 space-y-3 sm:space-y-4 reveal-on-scroll">
           <span class="font-mono text-xs uppercase tracking-widest text-emerald-400 font-semibold inline-flex items-center gap-2">
             <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
             ( 04 ) Conexão & Canais Diretos
           </span>
 
-          <h2 class="font-serif text-4xl sm:text-5xl md:text-6xl text-white font-normal leading-tight">
-            Vamos construir algo <br>
+          <h2 class="font-serif text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-white font-normal leading-tight break-words">
+            Vamos construir algo <br class="hidden sm:inline">
             <span class="italic text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 via-teal-300 to-emerald-200">extraordinário</span> juntos?
           </h2>
 
-          <p class="font-sans text-neutral-300 text-base sm:text-lg font-light leading-relaxed max-w-2xl mx-auto">
+          <p class="font-sans text-neutral-300 text-sm sm:text-base md:text-lg font-light leading-relaxed max-w-2xl mx-auto">
             Disponível para novos projetos freelance, estágios e oportunidades no mercado de trabalho. Escolha o seu canal de preferência:
           </p>
         </div>
 
         <!-- Grade de Cartões de Contato Editoriais -->
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6 mb-10 md:mb-12">
           
           <!-- Card 1: WhatsApp (Destaque Principal de Resposta Imediata) -->
-          <a href="https://wa.me/5538998070033?text=Ol%C3%A1%20Wandry,%20vim%20pelo%20seu%20portf%C3%B3lio!" target="_blank" rel="noopener noreferrer" class="group relative rounded-3xl p-7 bg-[#121212]/90 border border-emerald-500/30 hover:border-emerald-400/80 transition-all duration-500 hover:-translate-y-1.5 shadow-[0_10px_30px_rgba(0,0,0,0.4)] hover:shadow-[0_20px_40px_rgba(16,185,129,0.18)] flex flex-col justify-between reveal-on-scroll delay-100">
+          <a href="https://wa.me/5538998070033?text=Ol%C3%A1%20Wandry,%20vim%20pelo%20seu%20portf%C3%B3lio!" target="_blank" rel="noopener noreferrer" class="group relative rounded-3xl p-5 sm:p-7 bg-[#121212]/90 border border-emerald-500/30 hover:border-emerald-400/80 transition-all duration-500 hover:-translate-y-1.5 shadow-[0_10px_30px_rgba(0,0,0,0.4)] hover:shadow-[0_20px_40px_rgba(16,185,129,0.18)] flex flex-col justify-between reveal-on-scroll delay-100">
             <div class="space-y-4">
               <div class="flex items-center justify-between">
-                <div class="w-12 h-12 rounded-2xl bg-emerald-500/15 border border-emerald-500/30 flex items-center justify-center text-emerald-400 group-hover:scale-110 group-hover:bg-emerald-500 group-hover:text-black transition-all duration-500">
-                  <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24">
+                <div class="w-11 h-11 sm:w-12 sm:h-12 rounded-2xl bg-emerald-500/15 border border-emerald-500/30 flex items-center justify-center text-emerald-400 group-hover:scale-110 group-hover:bg-emerald-500 group-hover:text-black transition-all duration-500">
+                  <svg class="w-5 h-5 sm:w-6 sm:h-6 fill-current" viewBox="0 0 24 24">
                     <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/>
                   </svg>
                 </div>
@@ -705,14 +725,14 @@
               </div>
               <div>
                 <span class="font-mono text-xs uppercase tracking-wider text-neutral-400 block">Canal Direto</span>
-                <h3 class="font-serif text-2xl font-bold text-white group-hover:text-emerald-400 transition-colors">WhatsApp</h3>
+                <h3 class="font-serif text-xl sm:text-2xl font-bold text-white group-hover:text-emerald-400 transition-colors">WhatsApp</h3>
                 <p class="font-mono text-sm text-emerald-300 font-semibold mt-1">(38) 99807-0033</p>
                 <p class="font-sans text-neutral-400 text-xs mt-2 leading-relaxed">
                   Para propostas ágeis, bate-papo técnico ou alinhamentos de escopo imediatos.
                 </p>
               </div>
             </div>
-            <div class="pt-6 mt-6 border-t border-white/5 flex items-center justify-between text-xs font-mono text-emerald-400">
+            <div class="pt-5 sm:pt-6 mt-5 sm:mt-6 border-t border-white/5 flex items-center justify-between text-xs font-mono text-emerald-400">
               <span class="font-medium group-hover:underline">Iniciar conversa no WhatsApp</span>
               <svg class="w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
@@ -721,11 +741,11 @@
           </a>
 
           <!-- Card 2: LinkedIn (Perfil Profissional & Networking) -->
-          <a href="https://www.linkedin.com/in/wandry-nunes/" target="_blank" rel="noopener noreferrer" class="group relative rounded-3xl p-7 bg-[#121212]/90 border border-white/10 hover:border-emerald-500/50 transition-all duration-500 hover:-translate-y-1.5 shadow-[0_10px_30px_rgba(0,0,0,0.4)] hover:shadow-[0_20px_40px_rgba(16,185,129,0.12)] flex flex-col justify-between reveal-on-scroll delay-150">
+          <a href="https://www.linkedin.com/in/wandry-nunes/" target="_blank" rel="noopener noreferrer" class="group relative rounded-3xl p-5 sm:p-7 bg-[#121212]/90 border border-white/10 hover:border-emerald-500/50 transition-all duration-500 hover:-translate-y-1.5 shadow-[0_10px_30px_rgba(0,0,0,0.4)] hover:shadow-[0_20px_40px_rgba(16,185,129,0.12)] flex flex-col justify-between reveal-on-scroll delay-150">
             <div class="space-y-4">
               <div class="flex items-center justify-between">
-                <div class="w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-neutral-300 group-hover:scale-110 group-hover:bg-emerald-500/20 group-hover:text-emerald-400 group-hover:border-emerald-500/30 transition-all duration-500">
-                  <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24">
+                <div class="w-11 h-11 sm:w-12 sm:h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-neutral-300 group-hover:scale-110 group-hover:bg-emerald-500/20 group-hover:text-emerald-400 group-hover:border-emerald-500/30 transition-all duration-500">
+                  <svg class="w-5 h-5 sm:w-6 sm:h-6 fill-current" viewBox="0 0 24 24">
                     <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
                   </svg>
                 </div>
@@ -735,14 +755,14 @@
               </div>
               <div>
                 <span class="font-mono text-xs uppercase tracking-wider text-neutral-400 block">Networking</span>
-                <h3 class="font-serif text-2xl font-bold text-white group-hover:text-emerald-400 transition-colors">LinkedIn</h3>
+                <h3 class="font-serif text-xl sm:text-2xl font-bold text-white group-hover:text-emerald-400 transition-colors">LinkedIn</h3>
                 <p class="font-mono text-sm text-neutral-300 font-medium mt-1">/in/wandry-nunes</p>
                 <p class="font-sans text-neutral-400 text-xs mt-2 leading-relaxed">
                   Conexões profissionais, histórico de projetos, artigos e atualizações de carreira.
                 </p>
               </div>
             </div>
-            <div class="pt-6 mt-6 border-t border-white/5 flex items-center justify-between text-xs font-mono text-neutral-300 group-hover:text-emerald-400">
+            <div class="pt-5 sm:pt-6 mt-5 sm:mt-6 border-t border-white/5 flex items-center justify-between text-xs font-mono text-neutral-300 group-hover:text-emerald-400">
               <span class="font-medium group-hover:underline">Acessar perfil no LinkedIn</span>
               <svg class="w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
@@ -751,11 +771,11 @@
           </a>
 
           <!-- Card 3: GitHub (Código Aberto & Repositórios) -->
-          <a href="https://github.com/Wandry03" target="_blank" rel="noopener noreferrer" class="group relative rounded-3xl p-7 bg-[#121212]/90 border border-white/10 hover:border-emerald-500/50 transition-all duration-500 hover:-translate-y-1.5 shadow-[0_10px_30px_rgba(0,0,0,0.4)] hover:shadow-[0_20px_40px_rgba(16,185,129,0.12)] flex flex-col justify-between reveal-on-scroll delay-200">
+          <a href="https://github.com/Wandry03" target="_blank" rel="noopener noreferrer" class="group relative rounded-3xl p-5 sm:p-7 bg-[#121212]/90 border border-white/10 hover:border-emerald-500/50 transition-all duration-500 hover:-translate-y-1.5 shadow-[0_10px_30px_rgba(0,0,0,0.4)] hover:shadow-[0_20px_40px_rgba(16,185,129,0.12)] flex flex-col justify-between reveal-on-scroll delay-200">
             <div class="space-y-4">
               <div class="flex items-center justify-between">
-                <div class="w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-neutral-300 group-hover:scale-110 group-hover:bg-emerald-500/20 group-hover:text-emerald-400 group-hover:border-emerald-500/30 transition-all duration-500">
-                  <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24">
+                <div class="w-11 h-11 sm:w-12 sm:h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-neutral-300 group-hover:scale-110 group-hover:bg-emerald-500/20 group-hover:text-emerald-400 group-hover:border-emerald-500/30 transition-all duration-500">
+                  <svg class="w-5 h-5 sm:w-6 sm:h-6 fill-current" viewBox="0 0 24 24">
                     <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/>
                   </svg>
                 </div>
@@ -765,14 +785,14 @@
               </div>
               <div>
                 <span class="font-mono text-xs uppercase tracking-wider text-neutral-400 block">Open Source</span>
-                <h3 class="font-serif text-2xl font-bold text-white group-hover:text-emerald-400 transition-colors">GitHub</h3>
+                <h3 class="font-serif text-xl sm:text-2xl font-bold text-white group-hover:text-emerald-400 transition-colors">GitHub</h3>
                 <p class="font-mono text-sm text-neutral-300 font-medium mt-1">@Wandry03</p>
                 <p class="font-sans text-neutral-400 text-xs mt-2 leading-relaxed">
                   Códigos-fonte, commits, arquiteturas e experimentos de desenvolvimento web.
                 </p>
               </div>
             </div>
-            <div class="pt-6 mt-6 border-t border-white/5 flex items-center justify-between text-xs font-mono text-neutral-300 group-hover:text-emerald-400">
+            <div class="pt-5 sm:pt-6 mt-5 sm:mt-6 border-t border-white/5 flex items-center justify-between text-xs font-mono text-neutral-300 group-hover:text-emerald-400">
               <span class="font-medium group-hover:underline">Explorar no GitHub</span>
               <svg class="w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
@@ -783,28 +803,28 @@
         </div>
 
         <!-- Barra Inferior de Ação: Email & Voltar ao Topo -->
-        <div class="border border-white/10 rounded-2xl p-6 sm:p-8 bg-[#111111]/80 backdrop-blur-md flex flex-col md:flex-row items-center justify-between gap-6 reveal-on-scroll">
-          <div class="flex items-center gap-4 text-left">
-            <div class="p-3 rounded-xl bg-emerald-500/10 text-emerald-400 hidden sm:block">
-              <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <div class="border border-white/10 rounded-2xl p-5 sm:p-8 bg-[#111111]/80 backdrop-blur-md flex flex-col md:flex-row items-stretch md:items-center justify-between gap-5 sm:gap-6 reveal-on-scroll">
+          <div class="flex items-center gap-3.5 sm:gap-4 text-left">
+            <div class="p-2.5 sm:p-3 rounded-xl bg-emerald-500/10 text-emerald-400 hidden sm:block flex-shrink-0">
+              <svg class="w-5 h-5 sm:w-6 sm:h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
               </svg>
             </div>
             <div>
-              <span class="font-mono text-xs uppercase tracking-wider text-neutral-400 block">Prefere mensagem por Email?</span>
-              <a href="mailto:nuneswandry061@gmail.com" class="font-sans text-lg text-white font-medium hover:text-emerald-400 transition-colors">
+              <span class="font-mono text-[11px] sm:text-xs uppercase tracking-wider text-neutral-400 block">Prefere mensagem por Email?</span>
+              <a href="mailto:nuneswandry061@gmail.com" class="font-sans text-base sm:text-lg text-white font-medium hover:text-emerald-400 transition-colors break-all sm:break-normal">
                 nuneswandry061@gmail.com
               </a>
             </div>
           </div>
 
-          <div class="flex flex-wrap items-center gap-4">
-            <a href="https://wa.me/5538998070033?text=Ol%C3%A1%20Wandry,%20vim%20pelo%20seu%20portf%C3%B3lio!" target="_blank" rel="noopener noreferrer" class="btn-primary-green inline-flex items-center gap-2.5 px-6 py-3.5 rounded-full font-sans font-semibold text-xs tracking-wider uppercase">
-              <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
+          <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4 w-full md:w-auto">
+            <a href="https://wa.me/5538998070033?text=Ol%C3%A1%20Wandry,%20vim%20pelo%20seu%20portf%C3%B3lio!" target="_blank" rel="noopener noreferrer" class="btn-primary-green inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-full font-sans font-semibold text-xs tracking-wider uppercase text-center">
+              <svg class="w-4 h-4 fill-current flex-shrink-0" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
               <span>Conversar no WhatsApp</span>
             </a>
 
-            <a href="#hero" class="btn-secondary-outline inline-flex items-center gap-2 px-6 py-3.5 rounded-full font-sans font-medium text-xs tracking-wider uppercase">
+            <a href="#hero" class="btn-secondary-outline inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full font-sans font-medium text-xs tracking-wider uppercase text-center">
               <span>Voltar ao Topo ↑</span>
             </a>
           </div>
@@ -817,11 +837,11 @@
   <!-- =========================================================================
        7. RODAPÉ EDITORIAL
        ========================================================================= -->
-  <footer class="border-t border-white/5 py-12 bg-[#090909]">
-    <div class="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 flex flex-col md:flex-row items-center justify-between gap-6 font-mono text-xs text-neutral-400">
+  <footer class="border-t border-white/5 py-8 sm:py-12 bg-[#090909]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12 flex flex-col md:flex-row items-center justify-between gap-5 sm:gap-6 font-mono text-xs text-neutral-400 text-center md:text-left">
       
       <!-- Identidade & Direitos -->
-      <div class="flex flex-col sm:flex-row items-center gap-3 text-center sm:text-left">
+      <div class="flex flex-col sm:flex-row items-center gap-2.5 sm:gap-3 text-center sm:text-left">
         <a href="#hero" class="text-white font-serif font-bold text-base hover:text-emerald-400 transition-colors">Wandry</a>
         <span class="hidden sm:inline text-neutral-600">•</span>
         <span>Desenvolvedor Web • Diamantina - MG (Brasil)</span>
@@ -830,7 +850,7 @@
       </div>
 
       <!-- Links de Contato no Rodapé -->
-      <div class="flex items-center gap-5">
+      <div class="flex flex-wrap items-center justify-center gap-4 sm:gap-5">
         <a href="https://wa.me/5538998070033?text=Ol%C3%A1%20Wandry,%20vim%20pelo%20seu%20portf%C3%B3lio!" target="_blank" rel="noopener noreferrer" class="hover:text-emerald-400 transition-colors flex items-center gap-1.5" aria-label="WhatsApp de Wandry">
           <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
           <span>WhatsApp</span>
